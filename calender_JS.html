@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java script Calender Task September 29</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #calender {
+            margin: 30px;
+
+            padding: 30px;
+
+            border: 20px solid grey;
+            border-right-color: black;
+            border-bottom-color: black;
+            background-color: aquamarine;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+
+        }
+
+        .month {
+            width: 300px;
+            height: 250px;
+            border: 1px solid black;
+            padding: 15px;
+            text-align: center;
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 8px;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        td,
+        th {
+            width: 40px;
+            height: 30px;
+        }
+
+        .january th {
+            background-color: violet;
+        }
+
+        .february th {
+            background-color: rgb(176, 142, 78);
+        }
+
+        .march th {
+            background-color: rgb(215, 101, 101);
+        }
+
+        .april th {
+            background-color: greenyellow;
+        }
+
+        .may th {
+            background-color: goldenrod;
+        }
+
+        .june th {
+            background-color: burlywood;
+        }
+
+        .july th {
+            background-color: navajowhite;
+        }
+
+        .august th {
+            background-color: indianred;
+        }
+
+        .september th {
+            background-color: palevioletred;
+        }
+
+        .october th {
+            background-color: hotpink;
+        }
+
+        .november th {
+            background-color: rgb(142, 87, 173);
+        }
+
+        .december th {
+            background-color: rgb(129, 85, 21);
+        }
+
+        td:hover {
+            background-color: rgb(181, 181, 97);
+        }
+
+        @media screen and (max-width:950px) {
+            #calender {
+                margin: 10px;
+
+                padding: 10px;
+
+                border: 10px solid grey;
+                border-right-color: black;
+                border-bottom-color: black;
+                grid-template-columns: 1fr;
+
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calender">
+        <div class="month january">
+            <h4>January</h4>
+            <table id="jan_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 31; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 31; j++) {
+                        if (i == 1 && j < 5) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("jan_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month february">
+            <h4>February</h4>
+            <table id="feb_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 28; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 28; j++) {
+                        if (i == 1 && j < 1) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("feb_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month march">
+            <h4>March</h4>
+            <table id="mar_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 31; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 31; j++) {
+                        if (i == 1 && j < 1) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("mar_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month april">
+            <h4>April</h4>
+            <table id="apr_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 30; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 30; j++) {
+                        if (i == 1 && j < 4) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("apr_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month may">
+            <h4>May</h4>
+            <table id="may_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 31; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 31; j++) {
+                        if (i == 1 && j < 6) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("may_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month june">
+            <h4>June</h4>
+            <table id="jun_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 30; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 30; j++) {
+                        if (i == 1 && j < 2) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("jun_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month july">
+            <h4>July</h4>
+            <table id="jul_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 31; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 31; j++) {
+                        if (i == 1 && j < 4) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("jul_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month august">
+            <h4>August</h4>
+            <table id="aug_cal">
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 31; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 31; j++) {
+                        tr += `<td>${i}</td>`
+                        i++;
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                console.log(tag);
+                document.getElementById("aug_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month september">
+            <h4>September</h4>
+            <table id="sep_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 30; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 30; j++) {
+                        if (i == 1 && j < 3) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("sep_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month october">
+            <h4>October</h4>
+            <table id="oct_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 31; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 31; j++) {
+                        if (i == 1 && j < 5) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("oct_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month november">
+            <h4>November</h4>
+            <table id="nov_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 30; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 30; j++) {
+                        if (i == 1 && j < 1) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("nov_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+        <div class="month december">
+            <h4>December</h4>
+            <table id="dec_cal">
+
+            </table>
+            <script>
+                tag = `<tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>T</th>
+                                <th>F</th>
+                                <th>S</th>
+                           </tr>`;
+
+                for (i = 1; i <= 31; i++) {
+                    let tr = ""
+                    for (j = 0; j < 7 && i <= 31; j++) {
+                        if (i == 1 && j < 3) {
+                            tr += "<td></td>"
+                        } else {
+                            tr += `<td>${i}</td>`
+                            i++;
+                        }
+
+                    }
+                    i--;
+                    tag += `<tr>${tr}</tr>`;
+
+                }
+                document.getElementById("dec_cal").innerHTML = tag
+
+
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>

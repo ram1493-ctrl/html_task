@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rowspan and ColSpan Task</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        #con {
+            padding: 30px;
+            margin: 50px;
+
+            border: 2px solid black;
+            background-color: white;
+        }
+
+        #block1,
+        #block2 {
+            margin: 10px;
+            display: flex;
+        }
+
+        table {
+            border-collapse: collapse;
+            text-align: left;
+            width: 400px;
+            height: 300px;
+             background-color: aqua;
+        }
+        #table5{
+            width: 400px;
+            height: 500px;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid red;
+        }
+
+        #table2,
+        #table4 {
+            margin-top: 15px;
+
+        }
+
+        #table5 {
+            margin-top: 45px;
+
+        }
+
+        h4 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="con">
+        <div id="block1">
+            <div id="table1">
+                <h4>Table 1</h4>
+                <table>
+                    <tr>
+                        <td colspan="3">1</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">1</td>
+                        <td>2</td>
+                        <td rowspan="3">3</td>
+                        <td rowspan="2">4</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>4</td>
+
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="table2">
+                <h4>Table 2</h4>
+                <table>
+                    <tr>
+                        <td>1</td>
+                        <td colspan="2">2</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td rowspan="4">2</td>
+                        <td>3</td>
+                        <td rowspan="4">4</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">1</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="block2">
+            <div id="table3">
+                <h4>Table 3</h4>
+                <table>
+                    <tr>
+                        <td>1</td>
+                        <td rowspan="4">2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td colspan="2">3</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td colspan="3">3</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="table4">
+                <h4>Table 4</h4>
+                <table>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td rowspan="2">4</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">1</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td colspan="3">2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="table5">
+                <h4>Table 5</h4>
+                <table>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="2">3</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">1</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td rowspan="3">3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">1</td>
+                        <td>2</td>
+                        <td>4</td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>4</td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

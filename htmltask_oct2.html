@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        #main-con {
+            margin: auto;
+            width: 920px;
+            height: auto;
+            background-color: white;
+            border: 1px solid black;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #image-con {
+
+            width: 100%;
+
+        }
+
+        #img1 {
+            width: 100%;
+            height: auto;
+            display: block;
+            padding: 0px 2px;
+        }
+
+        #content,
+        ul,
+        ol {
+            padding: 15px;
+            line-height: 1.5;
+
+        }
+
+        h3 {
+            background-color: rgb(24, 43, 73);
+            color: white;
+            height: 4vh;
+            padding: 2px;
+            padding-left: 5px;
+
+        }
+
+
+
+
+        .para {
+            padding: 10px 0px;
+            line-height: 1.5;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+
+        #logo {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+
+
+        h5 {
+            background-color: rgb(255, 102, 0);
+            color: white;
+            height: 4vh;
+            padding: 5px;
+            text-align: center;
+        }
+
+        #card10 {
+            background-color: rgb(243, 225, 206);
+            /* width: 1068px; */
+            height: auto;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card10 {
+            width: 500px;
+            font-size: small;
+        }
+
+        .heading {
+            color: rgb(212, 81, 125);
+            font-size: large;
+        }
+
+        .image {
+            margin-left: auto;
+            width: 300px;
+            height: 150px;
+        }
+
+        /* .Anniversary {
+            font-size: small;
+        } */
+
+        #footer {
+            margin-top: 20px;
+        }
+
+
+        #profile-con {
+            display: flex;
+            /* height: 400px; */
+            color: white;
+            /* background-color: rgb(22, 53, 89); */
+            margin: 20px 15px;
+
+
+            padding-left: 65px;
+            padding-bottom: 30px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background: linear-gradient(120deg, #0b4f58 50%, #b24135 50%);
+
+        }
+
+        #profile {
+            padding-top: 75px;
+
+        }
+
+        #profile-content {
+            text-align: center;
+            font-size: x-large;
+            padding-top: 65px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        #profile_img {
+            padding: 5px;
+            background-color: rgb(179, 206, 224);
+            width: 210px;
+        }
+
+        span {
+            color: orange;
+        }
+
+        .profile-para {
+            line-height: 1.5;
+        }
+
+        #lif-con {
+            margin: 20px 15px;
+            background-color: rgb(22, 53, 89);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+
+        #lif {
+
+            display: flex;
+            border: 20px solid rgb(139, 157, 161);
+
+            /* align-items: center; */
+
+
+        }
+
+        #lif-img-space {
+            /* background-color: blue; */
+            width: 350px;
+            height: 450px;
+            flex-shrink: 0;
+
+        }
+
+
+
+        #lif-img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            margin-left: -60px;
+            margin-top: -40px;
+            /* object-fit: cover; */
+            border-radius: 0 50% 50% 50%;
+            /* border-bottom-left-radius: 30%;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%; */
+            /* padding-bottom: 10px; */
+
+            border-bottom: 20px solid rgb(139, 157, 161);
+            border-right: 20px solid rgb(139, 157, 161);
+        }
+
+        #lif-content {
+            text-align: center;
+            font-size: 13px;
+            padding-right: 15px;
+            /* background-color: aqua; */
+            color: white;
+            /* margin-left: 30px; */
+            line-height: 1.6;
+
+        }
+
+        #sign {
+            text-align: right;
+            color: rgb(238, 178, 63);
+            /* padding-right: 30px;
+            padding-bottom: 10px; */
+            font-size: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="main-con">
+        <div id="image-con">
+            <img id="img1" src="./image1.jpg" alt="Header Image">
+        </div>
+        <section id="content">
+            <div id="card1">
+                <h3>10 ways to be professional at workplace :</h3>
+                <p class="para content1">We often hear how important it is to behave "professionally" in the workplace.
+                    If
+                    you want to get ahead, be taken seriously, and have your boss think of you as an asset to the team,
+                    doing things in a professional way is vital. <br><br>
+                    But what exactly do employers mean by this term? Surely it's enough to do your job well and show up
+                    on
+                    time consistently. Or are there other things expected of you if you want to be viewed as being
+                    professional? <br><br> </p>
+            </div>
+            <div id="card2">
+                <h4>Avoid Being Unprofessional</h4><br>
+                <p class="para content2">Your employer may not tell you exactly their own view of what being
+                    professional
+                    means. But we all know from experience how to get labelled as "unprofessional". By finishing tasks
+                    or
+                    projects late, for instance. Being unprepared when attending meetings. Spending time gossiping at
+                    work.
+                    <br><br>
+                    Other ways to be seen as unprofessional? Treat people with disrespect. Steal their thunder by using
+                    their ideas without giving them credit. Say one thing then do the complete opposite. Break promises
+                    regularly.
+                </p><br>
+            </div>
+            <div id="card3">
+                <h4>10 Ways To Be Professional</h4>
+                <p class="para content3">
+
+                    Acting like a professional really means doing what it takes to make others think of you as reliable,
+                    respectful, and competent. Depending on where you work and the type of job you have, this can take
+                    on
+                    many
+                    different forms.<br><br>
+
+                    There are, however, quite a few common traits when it comes to being professional. This includes the
+                    following:
+                </p>
+                <ol>
+                    <li>Competence. You’re good at what you do – and you have the skills and knowledge that enable you
+                        to do
+                        your job well.</li>
+                    <li>Reliability. People can depend on you to show up on time, submit your work when it’s supposed to
+                        be
+                        ready, etc.</li>
+                    <li>Honesty. You tell the truth and are upfront about where things stand.</li>
+                    <li>Integrity. You are known for your consistent principles.</li>
+                    <li>Respect For Others. Treating all people as if they mattered is part of your approach.</li>
+                    <li>Self-Upgrading. Rather than letting your skills or knowledge become outdated, you seek out ways
+                        of
+                        staying current.</li>
+                    <li>Being Positive. No one likes a constant pessimist. Having an upbeat attitude and trying to be a
+                        problem-solver makes a big difference.</li>
+                    <li>Supporting Others. You share the spotlight with colleagues, take time to show others how to do
+                        things properly, and lend an ear when necessary.</li>
+                    <li>Staying Work-Focused. Not letting your private life needlessly have an impact on your job, and
+                        not
+                        spending time at work attending to personal matters.</li>
+                    <li>Listening Carefully. People want to be heard, so you give people a chance to explain their ideas
+                        properly.</li>
+                </ol>
+
+            </div>
+            <div id="card4">
+                <h4>The Professional Advantage</h4>
+                <p class="para content4">
+                    The more you put into practice the 10 points listed above, the better your chances will be to create
+                    a
+                    positive reputation for yourself. This can ultimately translate into raises and promotions, chances
+                    to
+                    work on more assignments that you enjoy, less likelihood of being downsized when layoffs are being
+                    considered, and the respect of peers and senior management.<br><br>
+                    The more you put into practice the 10 points
+                    listed above, the better your chances will be to create a positive reputation for yourself. This can
+                    ultimately translate into raises and promotions, chances to work on more assignments that you enjoy,
+                    less likelihood of being downsized when layoffs are being considered, and the respect of peers and
+                    senior management.
+                </p>
+            </div>
+            <div id="card5">
+                <h3>Client Closure</h3>
+                <img id="logo" src="./clientclosureimage.jpg" alt="logo">
+                <p class="para content5">
+                    Trimex Sands is India's top specialty value chain provider for industrial minerals,Founded in 1985.
+                    Trimex's global delivery network which delivers products such as Barite, Bentonite, Iron Ore,
+                    Feldspar, Bauxite, Ball Clay and Kaolin, among others, to the world's leading Oil Drilling, Ceramic,
+                    Glass, Construction, Energy, Steel, and Fertilizer companies.<br><br>
+                    Client close by Sales Team.
+                </p><br>
+            </div>
+            <div id="card7">
+                <h3>Life at Infiniti</h3>
+                <div id="lif-con">
+                    <div id="lif">
+                        <div id="lif-img-space">
+                            <img id="lif-img"
+                                src="https://www.bing.com/th/id/OIP.itM493hcAZ15jzW-bqL2yAHaHa?w=193&h=193&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=ImgAns&rm=2"
+                                alt="Mr. Senthilnathan">
+                        </div>
+                        <div id="lif-content" class="para content4">
+                            <p style="font-size: 40px;">"</p>
+                            "Infiniti is the perfect place for the freshers to Work & Learn. In Infiniti lots of
+                            opportunities to learn domain, technologies, business, culture, good habits and many more
+                            skills. I learned a lot during that past ten years period and still learning. Infiniti
+                            provides me an identity in my family life & society. I would feel like my home. Gained an
+                            industry knowledge & business experience while working in Infiniti. Excellent perks and an
+                            extremely helpful management. Infiniti gives me the freedom to decide how you work like to
+                            go about the project. Friends (co-workers) & management are helped me a lot and aid when I
+                            needed. Thank you so much to all for giving a wonderful time to share my experience in
+                            INFINITI."
+                            <p style="font-size: 40px; padding-top: 10px;">"</p>
+                            <div id="sign">- Mr. Senthilnathan</div>
+                        </div>
+
+                    </div>
+                    <!-- <div id="sign">- Mr. Senthilnathan</div> -->
+
+                </div>
+            </div>
+            <div id="card8">
+                <h3>Star Profile</h3>
+                <div id="profile-con">
+                    <div id="profile">
+                        <img id="profile_img" src="./profileimag.jpg" alt="Mrs. Amalya Mary">
+                        <p style="color: rgb(179, 206, 224);font-size: large; text-align: center;margin-top: 10px ;">
+                            Mrs. Amalya Mary
+                            <br>Buisness Analyst
+                        </p>
+                    </div>
+                    <div id="profile-content">
+                        <div class="profile-right">
+                            <p class="profile-para"><span>Inspiration:</span> Mom, Dr.ABJ</p>
+                            <p class="profile-para"><span>Memorable milestone:</span> Winning Infiniti Intrapreneurship
+                            </p>
+                            <p class="profile-para"><span>One thing that I learned hard way:</span> Cooking Biriyani</p>
+                            <p class="profile-para"><span>Work-life balance:</span> Planning my works</p>
+                            <p class="profile-para"><span>The best advice that I got forever:</span> If you think of
+                                buying a car, target
+                                buying a Flight then you end up buying a car</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card9">
+                <h3>Did you know:</h3>
+                <ol>
+                    <li>The word “TAX” is from the Latin taxo, meaning ‘I estimate.’ Only 3% of Indians pay income tax.
+                    </li>
+                    <li>India had the second highest total tourism GDP contribution in Asia-Pacific, behind China in
+                        2016.
+                    </li>
+                    <li>Chail Cricket Ground in Chail, Himachal Pradesh, is the highest cricket ground in the world.
+                    </li>
+                    <li>Mawlynnong in Meghalaya is the cleanest village in Asia.</li>
+                    <li>According to the Guinness Book of World Records, India ranks third behind the USA and the UK in
+                        the number of records claimed each year.</li>
+                </ol>
+            </div>
+            <h5 style="font-size: medium;">Our Employees</h5>
+            <div id="card10">
+
+                <article class="card10 Anniversary">
+                    <p class="heading">Work Anniversary :</p>
+                    <ul>
+                        <li><b>Selvendran.R (Sr.Automation Quality-IT) - 2 Years</b></li>
+                        <li><b>Senneth Mathew.J (Travel Counselor) - 1 Year</b></li>
+                        <li><b>Shalini (HR-Manager-BD) - 1 Year</b></li>
+                    </ul>
+                    <p>Infiniti <b>CONGRATULATES</b> him for being a part of the growth story of the company.</p>
+                    <br><br>
+                </article>
+                <img class="image" src="./congratz.jpg" alt="Congratz">
+                <article class="card10 Birthday">
+                    <p class="heading">Birthdays of the week :</p>
+                    <ul><b>
+                            <li>22.12.2017 – Bharathwaj.S (Trainee - operation)</li>
+                            <li>23.12.17 – Vivek.J (Key Account Manager - BD)</li>
+                            <li>25.12.17 – Madhiarasan.K (Software Engineer - IT)</li>
+                            <li>28.12.17 – chintan Tejani (Travel Consultant - operation)</li>
+                        </b>
+                    </ul>
+                    <p style="font-size: medium;">Infiniti wishes them a very <b>HAPPY BIRTHDAY</b>.</p>
+                </article>
+                <img class="image" src="./happybirtday.jpg" alt="Happy Birtday">
+            </div>
+
+        </section>
+        <p id="footer">Stay tuned with the next edition of infiniti Insight for more updates..... </p>
+    </div>
+
+</body>
+
+</html>
