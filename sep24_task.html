@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            background-color: blueviolet;
+            text-align: center;
+        }
+
+        #main-container {
+            display: flex;
+        }
+
+        #form-container {
+            background-color: #0e4b44;
+            width: 450px;
+            height: auto;
+            padding: 30px;
+            margin: 60px;
+            border-radius: 12px;
+            color: white;
+            position: relative;
+        }
+
+        label {
+            display: grid;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: large;
+        }
+
+        input,
+        #dep {
+            width: 100%;
+            box-sizing: border-box;
+            height: 38px;
+            background-color: silver;
+            border: none;
+            border-radius: 20px;
+            color: black;
+            padding: 0 15px;
+            font-size: 14px;
+
+        }
+
+        button {
+            height: 40px;
+            width: 100%;
+            background-color: rgb(228, 129, 9);
+            font-size: 14px;
+            margin-top: 25px;
+            font-weight: bold;
+            border-radius: 20px;
+            text-align: center;
+            border: none;
+        }
+
+        /* #result {
+            background-color: rgb(201, 198, 199);
+            width: auto;
+            height: 70vh;
+            padding: 30px;
+            margin: 60px;
+            font-size: medium;
+            color: rgb(29, 1, 29);
+        } */
+
+        h2 {
+            text-align: center;
+            font-size: large;
+        }
+
+        hr {
+            border-top: 1px dashed black;
+        }
+
+        .spacer-row {
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Student Detail</h1>
+    <div id="main-container">
+        <div id="form-container">
+            <form>
+                <label>User Student Name :</label>
+                <input id="name" type="text"><br>
+                <label>Student ID :</label>
+                <input id="student_id" type="text" placeholder="Example: STU123"><br>
+                <label>Email :</label>
+                <input id="email" type="text"><br>
+                <label>Department :</label>
+                <!-- <input id="dep" type="text"><br> -->
+                <select id="dep">
+                    <option value=""> Select Department </option>
+                    <option value="Java Full Stack">Java Full Stack</option>
+                    <option value="Python Full Stack">Python Full Stack</option>
+                    <option value="MERN Stack">MERN Stack</option>
+                    <option value="Data Analytics">Data Analytics</option>
+                </select><br>
+                <label>Mark :</label>
+                <input id="mark" type="number" min="0" max="100" step="5"><br>
+                <button type="button" onclick="validation()">Submit</button>
+            </form>
+        </div>
+        <div id="result">
+
+
+        </div>
+    </div>
+    <script>
+        function validation() {
+            let name = document.getElementById('name').value;
+            let student_id = document.getElementById('student_id').value;
+            let email = document.getElementById('email').value;
+            let dep = document.getElementById('dep').value;
+            let mark = document.getElementById('mark').value;
+            let data_check = true;
+            let student_id_val = false;
+            let email_val = false;
+            let mark_val = false;
+            let grade;
+            let result;
+            let eligibility;
+            let department;
+            let per;
+
+            if (name == '' ||
+                student_id == '' ||
+                dep == '' ||
+                mark == '' ||
+                email == '') {
+                alert("Enter all the Value in Form")
+                data_check = false;
+                document.getElementById('result').innerHTML = ``;
+                document.getElementById('result').style = ``;
+            } else {
+                name = name.trim().toLowerCase();
+                name = name.charAt(0).toUpperCase() + name.slice(1);
+
+
+                if (student_id.length == 6 && student_id.startsWith('STU')) {
+                    student_id_val = true;
+                } else {
+                    alert("Enter the Valid Student id")
+                }
+
+                if (email.includes('@') && email.includes('.')) {
+                    email_val = true;
+                } else {
+                    alert("Enter the Valid Email id")
+                }
+
+                mark = Number(mark);
+
+                if (mark >= 0 && mark <= 100) {
+                    mark_val = true;
+                    result = mark >= 50 ? 'Pass' : 'Fail';
+                    per = mark >= 80 ? "Excellent" : mark >= 60 ? "Good" : "Needs Improvement";
+                    if (mark >= 90) {
+                        grade = 'A+'
+                    } else if (mark >= 80) {
+                        grade = 'A'
+                    } else if (mark >= 70) {
+                        grade = 'B'
+                    } else if (mark >= 60) {
+                        grade = 'C'
+                    } else if (mark >= 50) {
+                        grade = 'D'
+                    } else {
+                        grade = 'F'
+                    }
+
+                } else {
+                    alert("Invalid Mark")
+                }
+
+                if (mark >= 60 && student_id_val && email_val) {
+                    eligibility = 'Eligible for Next Level'
+                }
+                else {
+                    eligibility = 'Not Eligible'
+                }
+
+                switch (dep) {
+
+                    case 'Java Full Stack':
+                        department = 'Advanced Java & Spring Boot';
+                        break;
+                    case 'Python Full Stack':
+                        department = 'Django & REST API';
+                        break;
+                    case 'MERN Stack':
+                        department = 'React & Node.js';
+                        break;
+                    case 'Data Analytics':
+                        department = 'Python & Power BI';
+                        break;
+                    default:
+                        department = 'None';
+                        break;
+
+                }
+
+
+                if (data_check && student_id_val && email_val && mark_val) {
+                    document.getElementById('result').innerHTML = `
+                    <hr><hr>
+                    <h2> STUDENT RESULT </h2>
+                    <hr><hr>
+                    <br><br>
+
+                    <table>
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td>:</td>
+                            <td>${name}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Student ID</strong></td>
+                            <td>:</td>
+                            <td>${student_id}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>:</td>
+                            <td>${email}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Department</strong></td>
+                            <td>:</td>
+                            <td>${dep}</td>
+                        </tr>
+                        <tr class="spacer-row"><td colspan="3"></td></tr>
+                        <tr>
+                            <td><strong>Mark</strong></td>
+                            <td>:</td>
+                            <td>${mark}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grade</strong></td>
+                            <td>:</td>
+                            <td>${grade}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Result</strong></td>
+                            <td>:</td>
+                            <td>${result}</td>
+                        </tr>
+                        <tr class="spacer-row"><td colspan="3"></td></tr>
+                        <tr>
+                            <td><strong>Performance</strong></td>
+                            <td>:</td>
+                            <td>${per}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eligibility</strong></td>
+                            <td>:</td>
+                            <td>${eligibility}</td>
+                        </tr>
+                        <tr id="recommended"></tr>
+
+                    </table>
+                     `;
+
+                    document.getElementById('result').style = `
+                                background-color: rgb(201, 198, 199);
+                                width: 30vw;
+                                height: 70vh;
+                                padding: 30px;
+                                margin: 60px;
+                                color: rgb(29, 1, 29);
+                     `;
+
+
+                    if (eligibility != 'Not Eligible') {
+                        document.getElementById('recommended').innerHTML = `
+                            <td><strong>Recommended</strong></td>
+                            <td>:</td>
+                            <td>${department}</td>`
+                    }
+                } else {
+                    document.getElementById('result').innerHTML = ``;
+                    document.getElementById('result').style = ``;
+                }
+            }
+        }
+
+    </script>
+
+</body>
+
+</html

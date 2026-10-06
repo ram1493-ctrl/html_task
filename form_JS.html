@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Discount Calculator</title>
+    <style>
+        h1 {
+            background-color: rebeccapurple;
+            text-align: center;
+        }
+
+        .form-container {
+            background-color: #0e4b44;
+            width: 450px;
+            padding: 30px;
+            margin: 50px;
+            border-radius: 12px;
+            color: white;
+            position: relative
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            height: 38px;
+            background-color: silver;
+            border: none;
+            border-radius: 20px;
+            color: black;
+            padding: 0 15px;
+            font-size: 14px;
+        }
+
+        button {
+            height: 40px;
+            width: 100%;
+            background-color: rgb(228, 129, 9);
+            font-size: 14px;
+            margin-top: 25px;
+            font-weight: bold;
+            border-radius: 20px;
+            text-align: center;
+            border: none;
+        }
+
+        #getbtn {
+            background-color: rgb(49, 49, 170);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Textile Shop Discount Calculator</h1>
+    <div class="form-container" id="form-container">
+        <form>
+
+            <label>Men's Purchase value:</label>
+            <input id="m_value" type="text" required readonly>
+            <label>Women's Purchase value:</label>
+            <input id="w_value" type="text" required readonly>
+            <label>Kid's Purchase value:</label>
+            <input id="k_value" type="text" required readonly>
+            <label>Total Purchase value:</label>
+            <input id="t_value" type="text" required readonly>
+
+            <button id="getbtn" type="button" onclick="getdata()">Get Input</button>
+
+            <button id="submitbtn" type="submit" onclick="discount()">SUBMIT</button>
+
+        </form>
+    </div>
+
+    <script>
+        window.alert("Welcome to the Textile Shop Site")
+
+        let men_purchase_amount = 0;
+        let women_purchase_amount = 0;
+        let Kid_purchase_amount = 0;
+        let purchase_amount = 0;
+
+        function getdata() {
+            men_purchase_amount = Number(prompt("Enter the Men's Purchase value:"))
+            document.getElementById('m_value').value = men_purchase_amount
+            women_purchase_amount = Number(prompt("Enter the Women's Purchase value:"))
+            document.getElementById('w_value').value = women_purchase_amount
+            Kid_purchase_amount = Number(prompt("Enter the Kid's Purchase value:"))
+            document.getElementById('k_value').value = Kid_purchase_amount
+            purchase_amount = men_purchase_amount + women_purchase_amount + Kid_purchase_amount
+
+            document.getElementById('t_value').value = purchase_amount
+
+        }
+
+        function discount() {
+            document.write(`<h2>Men's Purchase value is ${men_purchase_amount}</h2>`)
+            document.write(`<h2>Women's Purchase value is ${women_purchase_amount}</h2>`)
+            document.write(`<h2>Kids's Purchase value is ${Kid_purchase_amount}</h2>`)
+            document.write(`<h2>Total Purchase value is ${purchase_amount}</h2>`)
+            if (purchase_amount >= 10000) {
+                discount_value = purchase_amount * 0.8
+                document.write(`<h2>You are eligible for <mark>20% discount</mark> and Amount to be paid is <mark>${discount_value}</mark></h2>`)
+
+            } else if (purchase_amount >= 3000 && purchase_amount < 10000) {
+                discount_value = purchase_amount * 0.9
+                document.write(`<h2>You are eligible for <mark>10% discount</mark> and Amount to be paid is <mark>${discount_value}</mark></h2>`)
+
+            } else {
+
+                document.write(`<h2><mark>No Discount</mark> and Amount to be paid is <mark>${purchase_amount}</mark></h2>`)
+            }
+        }
+    </script>
+</body>
+
+</html>

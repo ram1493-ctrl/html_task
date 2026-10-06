@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramkumar Rammanohar | Portfolio</title>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+
+        section {
+            scroll-margin-top: 75px;
+        }
+
+        #top-nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 60px;
+            background-color: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-brand:hover {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #38bdf8;
+        }
+
+        #hero-header {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 50px 20px 50px;
+            text-align: center;
+        }
+
+        #hero-title {
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        #hero-role {
+            margin: 12px 0 0 0;
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        #main-content {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .content-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .section-title {
+            margin-top: 0;
+            color: #1e293b;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .section-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        #about-content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        #about-text-container {
+            flex: 1;
+        }
+
+        #about-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            text-align: center;
+            border: 3px solid #38bdf8;
+            object-fit: cover;
+            display: block;
+            background-color: #cbd5e1;
+        }
+
+        #tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .tech-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            width: 100px;
+
+        }
+
+
+        .tech-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 8px;
+        }
+
+        .tech-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .projects-grid {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            border: 1px solid white;
+            border-radius: 8px;
+            padding: 24px;
+            background-color: whitesmoke;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-name {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #0f172a;
+        }
+
+
+        .project-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #475569;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .contact-line {
+            font-size: 16px;
+            color: #475569;
+            margin: 10px 0;
+        }
+
+        #contact-email-link {
+            color: #0284c7;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        #contact-email-link:hover {
+            text-decoration: underline;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 26px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        #button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            background-color: #3399cb;
+            color: #ffffff;
+            border: 1px solid #3399cb;
+            width: 160px;
+
+
+        }
+
+
+
+        @media screen and (max-width:700px) {
+            #top-nav-bar {
+                height: auto;
+                padding: 12px 16px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-link {
+                font-size: 13px;
+            }
+
+            #about-content-wrapper {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            #about-image-container {
+                margin-bottom: 10px;
+            }
+
+            #tech-grid {
+                justify-content: center;
+            }
+
+            #button {
+                justify-content: center;
+            }
+    </style>
+</head>
+
+<body id="page-body">
+
+    <nav id="top-nav-bar" aria-label="Main Navigation">
+        <a href="#" class="nav-brand">Portfolio</a>
+        <div class="nav-links">
+            <a class="nav-link" href="#about-section">About</a>
+            <a class="nav-link" href="#projects-section">Project</a>
+            <a class="nav-link" href="#tech-section">Technology</a>
+            <a class="nav-link" href="#contact-section">Contact</a>
+        </div>
+    </nav>
+
+    <header id="hero-header">
+        <h1 id="hero-title">Ramkumar Rammanohar</h1>
+        <p id="hero-role">Automation Tester &amp; Fullstack Learner</p>
+    </header>
+
+    <main id="main-content">
+
+        <section id="about-section" class="content-card">
+            <h2 class="section-title">About Me</h2>
+            <div id="about-content-wrapper">
+                <div id="about-text-container">
+                    <p class="section-description">
+                        I am a Senior Automation QA Engineer with over a decade of experience building robust testing
+                        ecosystems and validating complex data pipelines. Specializing in Cucumber-driven Ruby
+                        frameworks, Tricentis Tosca (including automated PDF validation), ETL data integrity, and web
+                        services/API testing, I bridge the gap between architectural concepts and maintainable,
+                        production-ready software.<br><br>
+                    </p>
+                    <p class="section-description">
+                        I enjoy transforming conceptual ideas and data structures into real, usable software that
+                        prioritizes
+                        maintainability and clean workflows.
+                    </p>
+
+                    <div class="button-container">
+                        <button type="button" id="button">Hire Me</button>
+                        <button type="button" id="button">Download CV</button>
+                    </div>
+                </div>
+                <div id="about-image-container">
+                    <img id="about-img" src="./profile.jpeg" alt="Ramkumar">
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="projects-section" class="content-card">
+            <h2 class="section-title">Project</h2>
+            <div class="projects-grid">
+
+                <article class="project-card">
+                    <div>
+                        <h3 class="project-name">Automation Testing</h3>
+                        <p class="project-desc">
+                            Have worked aa Automation lead and worked on Rubymine and selenium with cucumber framework
+                            and have
+                            exposure to TOSCA. Good at database and webservice testing
+                        </p>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div>
+                        <h3 class="project-name">Full Stack Learning</h3>
+                        <p class="project-desc">
+                            Have Started learning HTML, CSS and JavaScript. As of now exploring the concepts and trying
+                            to implement
+                            and learn.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="tech-section" class="content-card">
+            <h2 class="section-title">Technology Used</h2>
+            <div id="tech-grid">
+                <div class="tech-badge">
+                    <img class="tech-icon"
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+                    <span class="tech-label">HTML5</span>
+                </div>
+                <div class="tech-badge">
+                    <img class="tech-icon"
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+                    <span class="tech-label">CSS3</span>
+                </div>
+                <div class="tech-badge">
+                    <img class="tech-icon"
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                        alt="JavaScript">
+                    <span class="tech-label">JavaScript</span>
+                </div>
+                <div class="tech-badge">
+                    <img class="tech-icon"
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rubymine/rubymine-original.svg"
+                        alt="Rubymine">
+                    <span class="tech-label">Rubymine</span>
+                </div>
+                <div class="tech-badge">
+                    <img class="tech-icon"
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original-wordmark.svg"
+                        alt="Jira">
+                    <span class="tech-label">Jira</span>
+                </div>
+                <div class="tech-badge">
+                    <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                        alt="Git">
+                    <span class="tech-label">Git</span>
+                </div>
+                <div class="tech-badge">
+                    <img class="tech-icon"
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                        alt="GitHub">
+                    <span class="tech-label">GitHub</span>
+                </div>
+                <div class="tech-badge">
+                    <img class="tech-icon"
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+                        alt="VS Code">
+                    <span class="tech-label">VS Code</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-section" class="content-card">
+            <h2 class="section-title">Contact &amp; Inquiries</h2>
+            <p class="section-description">I am open to collaborations, technical roles, and freelance inquiries. Get in
+                touch
+                directly via:</p>
+            <p class="contact-line"><b>Email:</b> <a id="contact-email-link"
+                    href="mailto:ramkumar@example.com">ramkumar@example.com</a></p>
+            <p class="contact-line"><b>Location:</b> Available for Remote &amp; Hybrid Opportunities</p>
+        </section>
+
+    </main>
+
+    <!-- <footer id="page-footer">
+        <div id="footer-links">
+            <a href="mailto:ramkumar@example.com">Email</a> |
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> |
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+    </footer> -->
+
+</body>
+
+</html>
