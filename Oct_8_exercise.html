@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Speed Change</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+
+
+        img {
+            width: 150px;
+            height: auto;
+            position: absolute;
+            animation: move 6s linear 0s infinite alternate-reverse;
+        }
+
+        @keyframes move {
+            0% {
+                left: 20vw;
+                top: 20vh;
+            }
+
+            25% {
+                left: 80vw;
+                top: 20vh;
+            }
+
+            50% {
+                left: 80vw;
+                top: 80vh;
+            }
+
+            75% {
+                left: 20vw;
+                top: 80vh;
+            }
+
+            100% {
+                left: 20vw;
+                top: 20vh;
+            }
+        }
+
+        #button-con {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        button {
+            /* margin-left: auto; */
+            margin: 20px;
+            width: 200px;
+            height: 50px;
+            font-weight: bolder;
+            font-size: 14px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-con">
+        <img id="img1"
+            src="https://www.bing.com/th/id/OIP.ShxxVibmGN4BzTplKNYRlAHaF7?w=193&h=154&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=ImgAns&rm=2"
+            alt="Eagle">
+
+    </div>
+    <div id="button-con">
+        <button onclick="inc()">Speed Increase</button>
+        <button onclick="dec()">Speed Decrease</button>
+    </div>
+    <script>
+        let speed = 6;
+        function inc() {
+            speed -= 2;
+            console.log(speed);
+            if (speed >= 1) {
+                document.getElementById("img1").style = `
+            animation: move ${speed}s linear 0s infinite alternate-reverse;
+            `
+            }
+            else {
+                document.getElementById("img1").style = `
+            animation: move 1s linear 0s infinite alternate-reverse;
+            `
+                alert("Animation at High Speed. Can't Increase")
+            }
+        }
+        function dec() {
+            speed += 2;
+            if (speed <= 100) {
+                console.log(speed);
+                document.getElementById("img1").style = `
+            animation: move ${speed}s linear 0s infinite alternate-reverse;
+            `
+            }
+            else{
+                 alert("Animation at Low Speed. Can't Decrese")
+            }
+
+            }
+    </script>
+</body>
+
+</html>
