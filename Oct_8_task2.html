@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            text-align: center;
+            color: rgb(56, 41, 2);
+        }
+
+
+        #form-con {
+            margin: 20px;
+            background-color: rgb(220, 189, 189);
+            width: 100%;
+            max-width: 250px;
+            padding: 40px 30px;
+            border-radius: 16px;
+            border: 1px solid black;
+
+        }
+
+        label {
+            display: block;
+            font-size: 15px;
+            color: #010d1e;
+            margin-bottom: 8px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 15px;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            border: none;
+            color: #0f172a;
+        }
+
+        button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 13px;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            background-color: rgb(63, 63, 195);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="form-con">
+        <div class="form-header">
+            <h2>Welcome to Login Page</h2>
+        </div>
+        <form action="">
+            <label for="">User Name</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+    <script>
+        const valid_name = ["Ramkumar", "Vallarasu", "Ponselvi", "Rahul", "Prithvika"]
+
+        function login() {
+            let val = false;
+            user_name = document.getElementById("username").value;
+            // val = valid_name.includes(user_name); //one way of validation
+            for (i = 0; i < valid_name.length; i++) {
+                if (user_name == valid_name[i]) {
+                    val = true;
+                }
+            }
+            val ? alert("Login Successful") : alert("Invalid User");
+
+        }
+    </script>
+</body>
+
+</html>

@@ -96,13 +96,17 @@
         }
         function dec() {
             speed += 2;
-            console.log(speed);
-            document.getElementById("img1").style = `
+            if (speed <= 100) {
+                console.log(speed);
+                document.getElementById("img1").style = `
             animation: move ${speed}s linear 0s infinite alternate-reverse;
             `
+            }
+            else{
+                 alert("Animation at Low Speed. Can't Decrese")
+            }
 
-
-        }
+            }
     </script>
 </body>
 
