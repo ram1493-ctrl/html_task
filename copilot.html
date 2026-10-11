@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Today, Build Tomorrow | EduTech</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 48px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f4f7fc;
+            color: #0f172a;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .main-box {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            align-items: center;
+            gap: 32px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 14px 35px rgba(37, 99, 235, 0.14);
+        }
+
+        #content-box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        #edu {
+            display: inline-block;
+            width: fit-content;
+            margin-bottom: 20px;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: #e8efff;
+            color: #075bea;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        h1 {
+            margin-bottom: 14px;
+            color: #102957;
+            font-size: 42px;
+            line-height: 1.14;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #334766;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .btn-con {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .button {
+            min-height: 48px;
+            padding: 12px 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid #0866ff;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 160ms ease, color 160ms ease;
+        }
+
+        #btn1 {
+            background: #0866ff;
+            color: #fff;
+        }
+
+        #btn1:hover {
+            background: #0754d1;
+        }
+
+        #btn2 {
+            background: #fff;
+            color: #0866ff;
+        }
+
+        #btn2:hover {
+            background: #eff5ff;
+        }
+
+        .play-circle {
+            width: 19px;
+            height: 19px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #0866ff;
+        }
+
+        .play-icon {
+            width: 12px;
+            height: 12px;
+            margin-left: 1px;
+            fill: #fff;
+        }
+
+        .status-con {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-top: 4px;
+        }
+
+        .status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 76px;
+        }
+
+        .status-value {
+            color: #0866ff;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .status-heading {
+            color: #334766;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .status-line {
+            width: 1px;
+            height: 36px;
+            background: #d8e0ed;
+        }
+
+        #img-box {
+            width: 100%;
+            height: 100%;
+            min-height: 370px;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        #img-box img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 370px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 991px) {
+            .main-box {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                width: 90%;
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+            #img-box,
+            #img-box img {
+                min-height: 0;
+            }
+
+            #img-box img {
+                height: auto;
+                aspect-ratio: 2 / 1;
+            }
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding: 24px 0;
+            }
+
+            .main-box {
+                gap: 20px;
+                width: 95%;
+                padding: 20px;
+            }
+
+            #edu {
+                margin-bottom: 14px;
+                font-size: 13px;
+            }
+
+            h1 {
+                margin-bottom: 12px;
+                font-size: 32px;
+            }
+
+            p {
+                margin-bottom: 16px;
+                font-size: 16px;
+            }
+
+            .btn-con {
+                width: 100%;
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 18px;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .status-con {
+                width: 100%;
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .status {
+                min-width: 0;
+            }
+
+            .status-value {
+                font-size: 21px;
+            }
+
+            .status-heading {
+                font-size: 12px;
+            }
+
+            .status-line {
+                height: 30px;
+            }
+
+            #img-box img {
+                aspect-ratio: 16 / 9;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="main-box">
+        <section id="content-box" aria-labelledby="hero-title">
+            <span id="edu">Welcome to EduTech</span>
+            <h1 id="hero-title">Learn Today<br>Build Tomorrow</h1>
+            <p>Join thousands of students and develop real-world skills with expert-led courses.</p>
+
+            <div class="btn-con">
+                <a class="button" id="btn1" href="#courses">Get Started <span aria-hidden="true">&rarr;</span></a>
+                <a class="button" id="btn2" href="#video">
+                    <span class="play-circle" aria-hidden="true">
+                        <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 5v14l11-7z"></path>
+                        </svg>
+                    </span>
+                    Watch Video
+                </a>
+            </div>
+
+            <div class="status-con" aria-label="EduTech statistics">
+                <div class="status">
+                    <span class="status-value">10K+</span>
+                    <span class="status-heading">Students</span>
+                </div>
+                <span class="status-line" aria-hidden="true"></span>
+                <div class="status">
+                    <span class="status-value">50+</span>
+                    <span class="status-heading">Courses</span>
+                </div>
+                <span class="status-line" aria-hidden="true"></span>
+                <div class="status">
+                    <span class="status-value">95%</span>
+                    <span class="status-heading">Success Rate</span>
+                </div>
+            </div>
+        </section>
+
+        <div id="img-box">
+            <img src="https://th.bing.com/th/id/OIP.ncX2DiSlLR3bc_M6wZgswgHaE8?w=275&amp;h=183&amp;c=7&amp;r=0&amp;o=7&amp;dpr=1.3&amp;pid=1.7&amp;rm=3"
+                alt="Laptop displaying an online learning course">
+        </div>
+    </main>
+</body>
+
+</html>
