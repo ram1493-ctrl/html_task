@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <Script>
+
+/*Build a small greeting helper. The main function, createGreeting, should take a person's first name, last name, and time of day, then return one greeting string.
+
+Write these functions:
+
+formatName(firstName, lastName) should return the first and last name as one string.
+
+getGreeting(timeOfDay) should return "Good morning", "Good afternoon", or "Good evening".
+
+createGreeting(firstName, lastName, timeOfDay) should use the other two functions and return the final greeting.
+
+Sample checks:
+
+js
+
+console.log(createGreeting('Ava', 'Stone', 'morning'));
+console.log(createGreeting('Noah', 'Kim', 'evening'));
+console.log(createGreeting('Mina', 'Patel', 'afternoon'));
+Expected output:
+
+txt
+
+Good morning, Ava Stone
+Good evening, Noah Kim
+Good afternoon, Mina Patel
+Your functions should return strings. Use console.log only to test your answer. */
+
+
+        function formatName(firstName, lastName) {
+            // return `${firstName} ${lastName}`;
+            return firstName + ' ' + lastName;
+        }
+
+
+        function getGreeting(timeOfDay) {
+            switch (timeOfDay) {
+                case "morning":
+                    return "Good morning"
+                case "afternoon":
+                    return "Good afternoon"
+                case "evening":
+                    return "Good evening"
+                default:
+                    alert("Invalid Time of day");
+                    break;
+            }
+        }
+
+        function createGreeting(firstName, lastName, timeOfDay) {
+            return (getGreeting(timeOfDay) + ', ' + formatName(firstName, lastName))
+
+        }
+
+        console.log(createGreeting('Ava', 'Stone', 'morning'));
+        console.log(createGreeting('Noah', 'Kim', 'evening'));
+        console.log(createGreeting('Mina', 'Patel', 'afternoon'));
+    </Script>
+</body>
+
+</html>
