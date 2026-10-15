@@ -10,11 +10,11 @@
 <body>
     <script>
         function calculateDiscount(price, discountPercent) {
-            return (price * discountPercent)/100
+            return (price * discountPercent) / 100
         }
 
         function calculateTax(priceAfterDiscount, taxPercent) {
-            return (priceAfterDiscount * taxPercent)/100
+            return (priceAfterDiscount * taxPercent) / 100
         }
 
         function calculateFinalPrice(price, discountPercent, taxPercent) {
@@ -22,15 +22,22 @@
         }
 
         function createPriceSummary(price, discountPercent, taxPercent) {
-            discount_amount = calculateDiscount(price, discountPercent);
-            tax_amount = calculateTax(price-discount_amount, taxPercent);
-            final_price = calculateFinalPrice(price, discount_amount, tax_amount);
-            return `{
-                price:${price},
-                discount:${discount_amount},
-                tax:${tax_amount},
-                finalPrice:${final_price},
-            }`
+            discount = calculateDiscount(price, discountPercent);
+            tax = calculateTax(price - discount, taxPercent);
+            finalPrice = calculateFinalPrice(price, discount, tax);
+            // return `{
+            //     price:${price},
+            //     discount:${discount},
+            //     tax:${tax},
+            //     finalPrice:${finalPrice},
+            // }`
+
+            return {
+                price,
+                discount,
+                tax,
+                finalPrice,
+            };
 
         } //should return an object with price, discount, tax, and finalPrice.
 
