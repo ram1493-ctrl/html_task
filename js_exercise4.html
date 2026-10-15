@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // isPositive(number) should return true when the number is greater than 0.
+        function isPositive(number) {
+            return (number > 0 ? true : false);
+        }
+
+        // isNegative(number) should return true when the number is less than 0.
+        function isNegative(number) {
+            return (number < 0 ? true : false);
+        }
+
+        // isZero(number) should return true when the number is exactly 0.
+        function isZero(number) {
+            return (number == 0 ? true : false);
+        }
+
+        // isEven(number) should return true when the number is even.
+        function isEven(number) {
+            return ((number % 2) == 0 ? true : false);
+        }
+
+        function isOdd(number) {
+            return ((number % 2) != 0 ? true : false);
+        }
+
+        // describeNumber(number) should return an object with positive, negative, zero, even, and odd properties.
+
+        function describeNumber(number) {
+            return { positive: isPositive(number), negative: isNegative(number), zero: isZero(number), even: isEven(number), odd: isOdd(number) }
+        }
+
+        console.log(describeNumber(8));
+        console.log(describeNumber(-3));
+        console.log(describeNumber(0));
+        console.log(describeNumber(7));
+    </script>
+</body>
+
+</html>
