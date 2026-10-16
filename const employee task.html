@@ -24,18 +24,18 @@
             { id: 112, name: "Anitha", department: "IT", salary: 105000, performance: 98, experience: 10, active: true, skills: ["Java", "AWS", "SQL"] }
         ];
 
-        function employees_sort_by(value, order) {
+        function employees_sort_by(obj, value, order) {
             switch (order) {
                 case "Asc":
-                    return employees.sort((val1, val2) => val1[value] - val2[value]);
+                    return obj.sort((val1, val2) => val1[value] - val2[value]);
                 case "Desc":
-                    return employees.sort((val1, val2) => val2[value] - val1[value]);
+                    return obj.sort((val1, val2) => val2[value] - val1[value]);
 
             }
         }
 
-        function employees_filter_by(value, symbol, expected) {
-            return employees.filter((val, ind, arr) => {
+        function employees_filter_by(obj, value, symbol, expected) {
+            return obj.filter((val, ind, arr) => {
                 filter = val[value]
                 switch (symbol) {
                     case '>':
@@ -70,7 +70,7 @@
 
         // 2.Use find() to identify the highest - paid employee.
 
-        let sortbysalary = employees_sort_by("salary", "Desc")[0];
+        let sortbysalary = employees_sort_by(employees, "salary", "Desc")[0];
 
         // 3.Use includes() to check whether an employee has the "AWS" skill.
         let awscheck = employees.filter((val, ind, arr) => val.skills.includes("AWS"));
@@ -87,7 +87,7 @@
 
         // 6.Use every() to verify whether all active employees have a performance score of at least 70.
 
-        let every_per_atleas_70 = employees_filter_by("active", "==", true).every((val, ind, arr) => val.performance > 70);
+        let every_per_atleas_70 = employees_filter_by(employees, "active", "==", true).every((val, ind, arr) => val.performance > 70);
 
 
         //Part B — Filtering and Sorting
@@ -95,37 +95,37 @@
 
         // 7.Use filter() to retrieve all active employees.
 
-        let active_employees = employees_filter_by("active", "==", true);
+        let active_employees = employees_filter_by(employees, "active", "==", true);
         // console.log(active_employees);   
 
         // 8.Filter employees belonging to the IT department.
 
-        let IT_employees = employees_filter_by("department", "==", "IT");
+        let IT_employees = employees_filter_by(employees, "department", "==", "IT");
         // console.log(IT_employees);   
 
         // 9.Find employees whose salary exceeds ₹70,000.
 
-        let greater70k_salary = employees_filter_by("salary", ">", 70000);
+        let greater70k_salary = employees_filter_by(employees, "salary", ">", 70000);
         // console.log(greater70k_salary);   
 
         // 10.Retrieve employees with performance scores of 90 or above.
 
-        let greater90_per = employees_filter_by("performance", ">=", 90);
+        let greater90_per = employees_filter_by(employees, "performance", ">=", 90);
         // console.log(greater90_per);   
 
         // 11.Sort all employees by salary in descending order.
 
-        const sortbysalary_desc = employees_sort_by("salary", "Desc");
+        const sortbysalary_desc = employees_sort_by(employees, "salary", "Desc");
         // console.log(sortbysalary_desc);   
 
         // 12.Find the top three highest - paid employees without modifying the original array.
 
-        let top_3_paid = employees_sort_by("salary", "Desc").slice(0, 3);
+        let top_3_paid = employees_sort_by(employees, "salary", "Desc").slice(0, 3);
         // console.log(top_3_paid)
 
         // 13.Sort employees by experience in ascending order.
 
-        let sortbyexp_asc = employees_sort_by("experience", "Asc")
+        let sortbyexp_asc = employees_sort_by(employees, "experience", "Asc")
         // console.log(sortbyexp_asc);   
 
         // 14.Filter active employees with at least five years of experience and performance scores above 85.
@@ -214,18 +214,93 @@
 
         // 26.Create a list of employee names in uppercase.
 
-        let employee_name = employees.map((val)=>val.name.toUpperCase());
+        let employee_name = employees.map((val) => val.name.toUpperCase());
 
         // 27.Generate a report containing only active employees, sorted by salary in descending order, with their names and salaries.
+
+        let report_27 = employees_sort_by(active_employees, "salary", "Desc").map((val) => {
+            return {
+                "name": val.name,
+                "salary": val.salary
+            }
+        })
+
+        //Part E — Department-Level Analytics
+
+        // 28.Use reduce() to calculate the number of employees in each department.
+
+        no_of_employee_department = employees.reduce((count, val) => {
+            if (count[val.department] == undefined) count[val.department] = 0;
+            count[val.department] = count[val.department] + 1;
+            return count
+        }, {})
+
+
+        // 29.Calculate total salary expenditure for each department.
+
+        let salary_by_department_obj = employees.reduce((count, val) => {
+            if (count[val.department] == undefined) count[val.department] = 0;
+            count[val.department] = count[val.department] + val.salary;
+            return count
+        }, {});
+
+        let salary_by_department = Object.entries(salary_by_department_obj).map(([department, total_salary]) =>
+        ({
+            department,
+            total_salary
+        }));
+
+
+
+        // 30.Identify the department with the highest total payroll.
+
+        let high_payroll_department = employees_sort_by(salary_by_department, "total_salary", "Desc")[0].department;
+
+        // 31.Calculate the average performance score for each department.
+
+        let avg_per_department_obj = employees.reduce((count, val) => {
+            if (count[val.department] == undefined) count[val.department] = 0;
+            count[val.department] = count[val.department] + val.performance;
+            return count
+        }, {});
+
+        let avg_per_department = Object.entries(avg_per_department_obj).map(([department, total_performance]) =>
+        ({
+            department,
+            // total_performance,
+            // "employee_count": no_of_employee_department[department],
+            "average performance": (total_performance / no_of_employee_department[department]).toFixed(2)
+        }));
+
+        // 32.Identify departments where at least one employee has a performance score below 60.
 
         
 
 
+        // 33.Generate a department - wise report containing employee count, total payroll, and average performance.
+
+        // let report_by_department = Object.entries(avg_per_department_obj).map(([department, total_performance]) =>
+        // ({
+        //     department,
+        //     "total payroll": salary_by_department_obj[department],
+        //     "employee_count": no_of_employee_department[department],
+        //     "average performance": (total_performance / no_of_employee_department[department]).toFixed(2)
+        // }));
+
+        let report_by_department = avg_per_department.map((val) => {
+            return {
+                ...val,
+                "total payroll": salary_by_department_obj[val.department],
+                "employee_count": no_of_employee_department[val.department],
+            }
+        })
 
 
 
 
-        console.log(employee_name)
+
+        console.log(report)
+        console.log(report_33)
 
 
 
