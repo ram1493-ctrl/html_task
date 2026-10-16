@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const employees = [
+            { id: 101, name: "Arun", department: "IT", salary: 75000, performance: 92, experience: 6, active: true, skills: ["JavaScript", "React"] },
+            { id: 102, name: "Priya", department: "HR", salary: 48000, performance: 85, experience: 4, active: true, skills: ["Excel", "Recruitment"] },
+            { id: 103, name: "Karthik", department: "IT", salary: 95000, performance: 96, experience: 8, active: true, skills: ["Java", "Spring"] },
+            { id: 104, name: "Divya", department: "Finance", salary: 65000, performance: 78, experience: 5, active: true, skills: ["Excel", "SQL"] },
+            { id: 105, name: "Vijay", department: "IT", salary: 55000, performance: 68, experience: 2, active: true, skills: ["JavaScript", "HTML"] },
+            { id: 106, name: "Meena", department: "Finance", salary: 82000, performance: 91, experience: 7, active: true, skills: ["SQL", "Python"] },
+            { id: 107, name: "Suresh", department: "HR", salary: 42000, performance: 62, experience: 3, active: false, skills: ["Recruitment"] },
+            { id: 108, name: "Nithya", department: "IT", salary: 88000, performance: 89, experience: 5, active: true, skills: ["React", "Node.js"] },
+            { id: 109, name: "Praveen", department: "Sales", salary: 60000, performance: 75, experience: 4, active: true, skills: ["Communication", "CRM"] },
+            { id: 110, name: "Lakshmi", department: "Sales", salary: 72000, performance: 94, experience: 6, active: true, skills: ["CRM", "Analytics"] },
+            { id: 111, name: "Manoj", department: "Finance", salary: 50000, performance: 55, experience: 1, active: false, skills: ["Excel"] },
+            { id: 112, name: "Anitha", department: "IT", salary: 105000, performance: 98, experience: 10, active: true, skills: ["Java", "AWS", "SQL"] }
+        ];
+
+        function employees_sort_by(value, order) {
+            switch (order) {
+                case "Asc":
+                    return employees.sort((val1, val2) => val1[value] - val2[value]);
+                case "Desc":
+                    return employees.sort((val1, val2) => val2[value] - val1[value]);
+
+            }
+        }
+
+        function employees_filter_by(value, symbol, expected) {
+            return employees.filter((val, ind, arr) => {
+                filter = val[value]
+                switch (symbol) {
+                    case '>':
+                        return filter > expected
+                    case '>=':
+                        return filter >= expected
+                    case '<':
+                        return filter < expected
+                    case '<=':
+                        return filter <= expected
+                    case '==':
+                        return filter == expected
+                    case '!=':
+                        return filter != expected
+                }
+            })
+        }
+
+        function employess_reduce_by(obj, value) {
+            return obj.reduce((sum, val) => {
+                return sum + val[value]
+            }, 0)
+        }
+
+
+        //Part A — Employee Search and Validation
+
+
+        // 1.Use find() to retrieve the employee whose ID is 108.
+
+        let E108 = employees.find((val, ind, arr) => val.id == 108);
+
+        // 2.Use find() to identify the highest - paid employee.
+
+        let sortbysalary = employees_sort_by("salary", "Desc")[0];
+
+        // 3.Use includes() to check whether an employee has the "AWS" skill.
+        let awscheck = employees.filter((val, ind, arr) => val.skills.includes("AWS"));
+
+        // 4.Use indexOf() to find the position of "React" in a given skills array.
+
+        let reactpostition = employees.filter((val, ind, arr) => val.skills.includes("React")).map((val) => {
+            return { ...val, "React_pos": val.skills.indexOf("React") }
+        })
+
+        // 5.Use some() to check whether at least one employee has a performance score below 60.
+
+        let some_per_les_60 = employees.some((val, ind, arr) => val.performance < 60);
+
+        // 6.Use every() to verify whether all active employees have a performance score of at least 70.
+
+        let every_per_atleas_70 = employees_filter_by("active", "==", true).every((val, ind, arr) => val.performance > 70);
+
+
+        //Part B — Filtering and Sorting
+
+
+        // 7.Use filter() to retrieve all active employees.
+
+        let active_employees = employees_filter_by("active", "==", true);
+        // console.log(active_employees);   
+
+        // 8.Filter employees belonging to the IT department.
+
+        let IT_employees = employees_filter_by("department", "==", "IT");
+        // console.log(IT_employees);   
+
+        // 9.Find employees whose salary exceeds ₹70,000.
+
+        let greater70k_salary = employees_filter_by("salary", ">", 70000);
+        // console.log(greater70k_salary);   
+
+        // 10.Retrieve employees with performance scores of 90 or above.
+
+        let greater90_per = employees_filter_by("performance", ">=", 90);
+        // console.log(greater90_per);   
+
+        // 11.Sort all employees by salary in descending order.
+
+        const sortbysalary_desc = employees_sort_by("salary", "Desc");
+        // console.log(sortbysalary_desc);   
+
+        // 12.Find the top three highest - paid employees without modifying the original array.
+
+        let top_3_paid = employees_sort_by("salary", "Desc").slice(0, 3);
+        // console.log(top_3_paid)
+
+        // 13.Sort employees by experience in ascending order.
+
+        let sortbyexp_asc = employees_sort_by("experience", "Asc")
+        // console.log(sortbyexp_asc);   
+
+        // 14.Filter active employees with at least five years of experience and performance scores above 85.
+
+        let activ_5exp_85per = employees.filter((val, ind, arr) => (val.performance > 85 && val.experience >= 5 && val.active == true));
+
+
+        //Part C — Payroll and Performance Analytics
+
+
+        // 15.Use reduce() to calculate the total salary expenditure for all employees.
+
+        let total_salary = employess_reduce_by(employees, "salary");
+
+        // 16.Calculate the total payroll for active employees only.
+
+        let total_salary_active = employess_reduce_by(active_employees, "salary");
+
+        // 17.Calculate the average salary across all employees.
+
+        let average_salary = total_salary / employees.length;
+
+        // 18.Calculate the total salary expenditure for the IT department.
+
+        let total_salary_IT = employess_reduce_by(IT_employees, "salary");
+
+        // 19.Count how many employees have a performance score of 90 or above.
+
+        let count_greater90_per = greater90_per.length;
+
+        // 20.Calculate the total annual salary expenditure for active employees, assuming the given salaries are monthly salaries.
+
+        let total_annual_salary_active = total_salary_active * 12;
+
+        // 21.Calculate a 10 % bonus for each active employee using map().
+
+        let bonus_active = active_employees.map((val) => {
+            return { ...val, "Bonus": val.salary * 0.1 }
+        })
+
+        // 22.Calculate the total bonus expenditure for all active employees.
+
+        let total_bonus_active = employess_reduce_by(bonus_active, "Bonus");
+
+        //Part D — Employee Report Generation
+
+        // 23.Use map() to generate a new report containing only employee name, department, salary, and performance score.
+
+        let new_report = employees.map((val, ind, arr) => {
+            return {
+                "employee name": val.name,
+                "department": val.department,
+                "salary": val.salary,
+                "performance score": val.performance,
+            }
+        })
+
+        // 24.Add a performanceStatus property to each employee:
+        //     90 and above: "Excellent"
+        //     75–89: "Good"
+        //     60–74: "Average"
+        //     Below 60: "Needs Improvement"
+
+        let per_status = employees.map((val) => {
+            performance = val.performance;
+            if (performance >= 90) status = "Excellent";
+            else if (performance >= 75) status = "Good";
+            else if (performance >= 60) status = "Average";
+            else status = "Needs Improvement";
+
+            return {
+                ...val, "performanceStatus": status
+            }
+        })
+        // 25.Generate a report containing employee name, current salary, 10 % bonus, and final salary after the bonus.
+
+        let bonus_new_report = employees.map((val) => {
+            bonus = val.salary * 0.1;
+            return {
+                "employee name": val.name,
+                "current salary": val.salary,
+                "10 % bonus": bonus,
+                "final salary after the bonus": val.salary + bonus
+            }
+        })
+
+        // 26.Create a list of employee names in uppercase.
+
+        let employee_name = employees.map((val)=>val.name.toUpperCase());
+
+        // 27.Generate a report containing only active employees, sorted by salary in descending order, with their names and salaries.
+
+        
+
+
+
+
+
+
+        console.log(employee_name)
+
+
+
+
+    </script>
+</body>
+
+</html>
