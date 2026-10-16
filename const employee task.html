@@ -27,16 +27,16 @@
         function employees_sort_by(obj, value, order) {
             switch (order) {
                 case "Asc":
-                    return obj.sort((val1, val2) => val1[value] - val2[value]);
+                    return [...obj].sort((val1, val2) => val1[value] - val2[value]);
                 case "Desc":
-                    return obj.sort((val1, val2) => val2[value] - val1[value]);
+                    return [...obj].sort((val1, val2) => val2[value] - val1[value]);
 
             }
         }
 
         function employees_filter_by(obj, value, symbol, expected) {
             return obj.filter((val, ind, arr) => {
-                filter = val[value]
+                let filter = val[value]
                 switch (symbol) {
                     case '>':
                         return filter > expected
@@ -53,8 +53,9 @@
                 }
             })
         }
+        const unchangedemployees = structuredClone(employees);
 
-        function employess_reduce_by(obj, value) {
+        function employees_reduce_by(obj, value) {
             return obj.reduce((sum, val) => {
                 return sum + val[value]
             }, 0)
@@ -64,115 +65,141 @@
         //Part A — Employee Search and Validation
 
 
-        // 1.Use find() to retrieve the employee whose ID is 108.
+        console.log("1.Use find() to retrieve the employee whose ID is 108.")
 
         let E108 = employees.find((val, ind, arr) => val.id == 108);
+        console.log(E108);
 
-        // 2.Use find() to identify the highest - paid employee.
+        console.log("2.Use find() to identify the highest - paid employee.");
 
         let sortbysalary = employees_sort_by(employees, "salary", "Desc")[0];
+        console.log(sortbysalary);
 
-        // 3.Use includes() to check whether an employee has the "AWS" skill.
+
+        console.log("3.Use includes() to check whether an employee has the AWS skill.");
         let awscheck = employees.filter((val, ind, arr) => val.skills.includes("AWS"));
+        console.log(awscheck);
 
-        // 4.Use indexOf() to find the position of "React" in a given skills array.
+
+        console.log("4.Use indexOf() to find the position of 'React' in a given skills array.");
 
         let reactpostition = employees.filter((val, ind, arr) => val.skills.includes("React")).map((val) => {
             return { ...val, "React_pos": val.skills.indexOf("React") }
         })
+        console.log(reactpostition);
 
-        // 5.Use some() to check whether at least one employee has a performance score below 60.
+
+        console.log("5.Use some() to check whether at least one employee has a performance score below 60.");
 
         let some_per_les_60 = employees.some((val, ind, arr) => val.performance < 60);
+        console.log(some_per_les_60);
 
-        // 6.Use every() to verify whether all active employees have a performance score of at least 70.
+
+        console.log("6.Use every() to verify whether all active employees have a performance score of at least 70.");
 
         let every_per_atleas_70 = employees_filter_by(employees, "active", "==", true).every((val, ind, arr) => val.performance > 70);
+        console.log(every_per_atleas_70);
+
 
 
         //Part B — Filtering and Sorting
 
 
-        // 7.Use filter() to retrieve all active employees.
+        console.log("7.Use filter() to retrieve all active employees.");
 
         let active_employees = employees_filter_by(employees, "active", "==", true);
-        // console.log(active_employees);   
+        console.log(active_employees);
 
-        // 8.Filter employees belonging to the IT department.
+        console.log("8.Filter employees belonging to the IT department.");
 
         let IT_employees = employees_filter_by(employees, "department", "==", "IT");
-        // console.log(IT_employees);   
+        console.log(IT_employees);
 
-        // 9.Find employees whose salary exceeds ₹70,000.
+        console.log("9.Find employees whose salary exceeds ₹70,000.");
 
         let greater70k_salary = employees_filter_by(employees, "salary", ">", 70000);
-        // console.log(greater70k_salary);   
+        console.log(greater70k_salary);
 
-        // 10.Retrieve employees with performance scores of 90 or above.
+        console.log("10.Retrieve employees with performance scores of 90 or above.");
 
         let greater90_per = employees_filter_by(employees, "performance", ">=", 90);
-        // console.log(greater90_per);   
+        console.log(greater90_per);
 
-        // 11.Sort all employees by salary in descending order.
+        console.log("11.Sort all employees by salary in descending order.");
 
         const sortbysalary_desc = employees_sort_by(employees, "salary", "Desc");
-        // console.log(sortbysalary_desc);   
+        console.log(sortbysalary_desc);
 
-        // 12.Find the top three highest - paid employees without modifying the original array.
+        console.log("12.Find the top three highest - paid employees without modifying the original array.");
 
         let top_3_paid = employees_sort_by(employees, "salary", "Desc").slice(0, 3);
-        // console.log(top_3_paid)
+        console.log(top_3_paid)
 
-        // 13.Sort employees by experience in ascending order.
+        console.log("13.Sort employees by experience in ascending order.");
 
         let sortbyexp_asc = employees_sort_by(employees, "experience", "Asc")
-        // console.log(sortbyexp_asc);   
+        console.log(sortbyexp_asc);
 
-        // 14.Filter active employees with at least five years of experience and performance scores above 85.
+        console.log("14.Filter active employees with at least five years of experience and performance scores above 85.");
 
         let activ_5exp_85per = employees.filter((val, ind, arr) => (val.performance > 85 && val.experience >= 5 && val.active == true));
+        console.log(activ_5exp_85per);
 
 
         //Part C — Payroll and Performance Analytics
 
 
-        // 15.Use reduce() to calculate the total salary expenditure for all employees.
+        console.log("15.Use reduce() to calculate the total salary expenditure for all employees.");
 
-        let total_salary = employess_reduce_by(employees, "salary");
+        let total_salary = employees_reduce_by(employees, "salary");
+        console.log(total_salary);
 
-        // 16.Calculate the total payroll for active employees only.
+        console.log("16.Calculate the total payroll for active employees only.");
 
-        let total_salary_active = employess_reduce_by(active_employees, "salary");
+        let total_salary_active = employees_reduce_by(active_employees, "salary");
+        console.log(total_salary_active);
 
-        // 17.Calculate the average salary across all employees.
+        console.log("17.Calculate the average salary across all employees.");
 
         let average_salary = total_salary / employees.length;
+        console.log(average_salary);
 
-        // 18.Calculate the total salary expenditure for the IT department.
 
-        let total_salary_IT = employess_reduce_by(IT_employees, "salary");
+        console.log("18.Calculate the total salary expenditure for the IT department.");
 
-        // 19.Count how many employees have a performance score of 90 or above.
+        let total_salary_IT = employees_reduce_by(IT_employees, "salary");
+        console.log(total_salary_IT);
+
+
+        console.log("19.Count how many employees have a performance score of 90 or above.");
 
         let count_greater90_per = greater90_per.length;
+        console.log(count_greater90_per);
 
-        // 20.Calculate the total annual salary expenditure for active employees, assuming the given salaries are monthly salaries.
+
+        console.log("20.Calculate the total annual salary expenditure for active employees, assuming the given salaries are monthly salaries.");
 
         let total_annual_salary_active = total_salary_active * 12;
+        console.log(total_annual_salary_active);
 
-        // 21.Calculate a 10 % bonus for each active employee using map().
+
+        console.log("21.Calculate a 10 % bonus for each active employee using map().");
 
         let bonus_active = active_employees.map((val) => {
             return { ...val, "Bonus": val.salary * 0.1 }
         })
+        console.log(bonus_active);
 
-        // 22.Calculate the total bonus expenditure for all active employees.
 
-        let total_bonus_active = employess_reduce_by(bonus_active, "Bonus");
+        console.log("22.Calculate the total bonus expenditure for all active employees.");
+
+        let total_bonus_active = employees_reduce_by(bonus_active, "Bonus");
+        console.log(total_bonus_active);
+
 
         //Part D — Employee Report Generation
 
-        // 23.Use map() to generate a new report containing only employee name, department, salary, and performance score.
+        console.log("23.Use map() to generate a new report containing only employee name, department, salary, and performance score.");
 
         let new_report = employees.map((val, ind, arr) => {
             return {
@@ -182,8 +209,10 @@
                 "performance score": val.performance,
             }
         })
+        console.log(new_report);
 
-        // 24.Add a performanceStatus property to each employee:
+
+        console.log("24.Add a performanceStatus property to each employee:");
         //     90 and above: "Excellent"
         //     75–89: "Good"
         //     60–74: "Average"
@@ -200,7 +229,9 @@
                 ...val, "performanceStatus": status
             }
         })
-        // 25.Generate a report containing employee name, current salary, 10 % bonus, and final salary after the bonus.
+        console.log(per_status);
+
+        console.log("25.Generate a report containing employee name, current salary, 10 % bonus, and final salary after the bonus.");
 
         let bonus_new_report = employees.map((val) => {
             bonus = val.salary * 0.1;
@@ -211,12 +242,16 @@
                 "final salary after the bonus": val.salary + bonus
             }
         })
+        console.log(bonus_new_report);
 
-        // 26.Create a list of employee names in uppercase.
+
+        console.log("26.Create a list of employee names in uppercase.");
 
         let employee_name = employees.map((val) => val.name.toUpperCase());
+        console.log(employee_name);
 
-        // 27.Generate a report containing only active employees, sorted by salary in descending order, with their names and salaries.
+
+        console.log("27.Generate a report containing only active employees, sorted by salary in descending order, with their names and salaries.");
 
         let report_27 = employees_sort_by(active_employees, "salary", "Desc").map((val) => {
             return {
@@ -224,19 +259,23 @@
                 "salary": val.salary
             }
         })
+        console.log(report_27);
+
 
         //Part E — Department-Level Analytics
 
-        // 28.Use reduce() to calculate the number of employees in each department.
+        console.log("28.Use reduce() to calculate the number of employees in each department.");
 
         no_of_employee_department = employees.reduce((count, val) => {
             if (count[val.department] == undefined) count[val.department] = 0;
             count[val.department] = count[val.department] + 1;
             return count
         }, {})
+        console.log(no_of_employee_department);
 
 
-        // 29.Calculate total salary expenditure for each department.
+
+        console.log("29.Calculate total salary expenditure for each department.");
 
         let salary_by_department_obj = employees.reduce((count, val) => {
             if (count[val.department] == undefined) count[val.department] = 0;
@@ -249,14 +288,17 @@
             department,
             total_salary
         }));
+        console.log(salary_by_department);
 
 
 
-        // 30.Identify the department with the highest total payroll.
+
+        console.log("30.Identify the department with the highest total payroll.");
 
         let high_payroll_department = employees_sort_by(salary_by_department, "total_salary", "Desc")[0].department;
+        console.log(high_payroll_department);
 
-        // 31.Calculate the average performance score for each department.
+        console.log("31.Calculate the average performance score for each department.");
 
         let avg_per_department_obj = employees.reduce((count, val) => {
             if (count[val.department] == undefined) count[val.department] = 0;
@@ -271,16 +313,20 @@
             // "employee_count": no_of_employee_department[department],
             "average performance": (total_performance / no_of_employee_department[department]).toFixed(2)
         }));
+        console.log(avg_per_department);
 
-        // 32.Identify departments where at least one employee has a performance score below 60.
+
+        console.log("32.Identify departments where at least one employee has a performance score below 60.");
 
 
         //let some_per_les_60 = employees.some((val, ind, arr) => val.performance < 60);
 
         let dep_less_60per = employees_filter_by(employees, "performance", '<', 60).map((val) => val.department)
+        console.log(dep_less_60per);
 
 
-        // 33.Generate a department - wise report containing employee count, total payroll, and average performance.
+
+        console.log("33.Generate a department - wise report containing employee count, total payroll, and average performance.");
 
         // let report_by_department = Object.entries(avg_per_department_obj).map(([department, total_performance]) =>
         // ({
@@ -297,48 +343,122 @@
                 "employee_count": no_of_employee_department[val.department],
             }
         })
+        console.log(report_by_department);
+
 
 
         //Part F — Skills and Data Management
 
-        // 34.Combine all employee skills into a single array.
+        console.log("34.Combine all employee skills into a single array.");
 
         let all_employee_skill = employees.reduce((skill, val) => {
             return skill.concat(val.skills)
         }, [])
+        console.log(all_employee_skill);
 
 
-        // 35.Create a list of unique skills without duplicates.
+
+        console.log("35.Create a list of unique skills without duplicates.");
 
         let all_employee_skill_distinct = [...new Set(all_employee_skill)];
+        console.log(all_employee_skill_distinct);
 
-        // 36.Use includes() to determine whether "Python" is present in the combined skills list.
+
+        console.log("36.Use includes() to determine whether Python is present in the combined skills list.");
 
         let skill_python = all_employee_skill.includes("Python")
+        console.log(skill_python);
 
-        // 37.Use indexOf() to identify the first occurrence of "SQL".
+
+        console.log("37.Use indexOf() to identify the first occurrence of SQL.");
 
         let index_sql = all_employee_skill.indexOf("SQL")
-
-        // 38.Add a new employee using push().
-
-        const new_employee ={ id: 113, name: "Ramkumar", department: "IT", salary: 90000, performance: 88, experience: 4, active: true, skills: ["Java","SQL"] }
-
-        employees.push(new_employee)
-        console.log(employees)
-
-    
-        // 39.Remove the last employee using pop().
-
-        employees.pop()
-        // 40.Verify that the original employee dataset remains unchanged when generating reports and sorting copied data.
+        console.log(index_sql);
 
 
+        console.log("38.Add a new employee using push().");
+
+        const new_employee = { id: 113, name: "Ramkumar", department: "IT", salary: 90000, performance: 88, experience: 4, active: true, skills: ["Java", "SQL"] }
+
+        employees.push(new_employee);
+        console.log(employees);
+
+        (unchangedemployees.length == employees.length) ? console.log("original employee dataset remains unchanged") : console.log("original employee dataset changed");
+
+
+        console.log("39.Remove the last employee using pop().");
+
+        employees.pop();
+        console.log(employees);
+
+        console.log("40.Verify that the original employee dataset remains unchanged when generating reports and sorting copied data.");
+
+        (unchangedemployees.length == employees.length) ? console.log("original employee dataset remains unchanged") : console.log("original employee dataset changed");
+
+
+        //  Part G — Advanced Business Challenge
+
+        console.log("41. Employee Bonus Eligibility and Payroll Optimization");
+
+        let bonus_report = employees_sort_by((employees_filter_by(active_employees, "performance", '>=', 80)), "salary", "Desc").map((val) => {
+            let bonus = (val.performance >= 95) ? 15 : 10;
+            let bonus_amount = Number((val.salary * bonus / 100).toFixed(2));
+            return {
+                // ...val,
+                id: val.id,
+                name: val.name,
+                department: val.department,
+                salary: val.salary,
+                "bonus percentage": bonus + '%',
+                "bonus amount": bonus_amount,
+                "final salary": val.salary + bonus_amount
+
+            }
+        })
+        console.log(bonus_report)
+
+        let total_bonus_expenditure = employees_reduce_by(bonus_report, "bonus amount")
+        console.log(total_bonus_expenditure);
+
+        let high_bonus_employee = employees_sort_by(bonus_report, "bonus amount", "Desc")[0].name;
+        console.log(high_bonus_employee)
+
+        let ineligible_employee = employees.filter((val, ind, arr) => val.active == false || val.performance < 80).map((val) => val.name);
+        console.log(ineligible_employee);
+
+        let ineligible_validation = bonus_report.find((val, ind, arr) => ineligible_employee.includes(val.name));
+        if (ineligible_validation == undefined) console.log(" No ineligible employee appears in the final report");
+        else console.log(" Ineligible employee appears in the final report");
+
+
+        (unchangedemployees.length == employees.length) ? console.log("original employee dataset remains unchanged") : console.log("original employee dataset changed");
+
+        // Part H — Final Executive Report
+
+
+        const final_report = {
+            "Total employee count": employees.length,
+            "Active employee count": active_employees.length,
+            "Inactive employee count": employees.length - active_employees.length,
+            "Total monthly payroll": total_salary,
+            "Total annual payroll for active employees": total_annual_salary_active,
+            "Average salary": average_salary,
+            "Highest-paid employee": sortbysalary_desc[0].name,
+            "Lowest-paid employee": sortbysalary_desc[sortbysalary_desc.length - 1].name,
+            "Top three performers": employees_sort_by(employees, "performance", "Desc").slice(0, 3).map((val) => val.name),
+            "Department-wise payroll expenditure": salary_by_department,
+            "Total bonus expenditure": total_bonus_active,
+            "Employees requiring performance improvement":
+                employees_filter_by(per_status, "performanceStatus", '==', "Needs Improvement").map((val) => val.name),
+            "Unique skills count": all_employee_skill_distinct.length,
+            "Final bonus eligibility report": bonus_report
+        }
 
 
 
-        console.log(employees)
-        // console.log(all_employee_skill)
+
+        console.log(final_report)
+        // console.log(unchangedemployees)
 
 
 
