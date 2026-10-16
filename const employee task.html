@@ -274,7 +274,10 @@
 
         // 32.Identify departments where at least one employee has a performance score below 60.
 
-        
+
+        //let some_per_les_60 = employees.some((val, ind, arr) => val.performance < 60);
+
+        let dep_less_60per = employees_filter_by(employees, "performance", '<', 60).map((val) => val.department)
 
 
         // 33.Generate a department - wise report containing employee count, total payroll, and average performance.
@@ -296,11 +299,46 @@
         })
 
 
+        //Part F — Skills and Data Management
+
+        // 34.Combine all employee skills into a single array.
+
+        let all_employee_skill = employees.reduce((skill, val) => {
+            return skill.concat(val.skills)
+        }, [])
+
+
+        // 35.Create a list of unique skills without duplicates.
+
+        let all_employee_skill_distinct = [...new Set(all_employee_skill)];
+
+        // 36.Use includes() to determine whether "Python" is present in the combined skills list.
+
+        let skill_python = all_employee_skill.includes("Python")
+
+        // 37.Use indexOf() to identify the first occurrence of "SQL".
+
+        let index_sql = all_employee_skill.indexOf("SQL")
+
+        // 38.Add a new employee using push().
+
+        const new_employee ={ id: 113, name: "Ramkumar", department: "IT", salary: 90000, performance: 88, experience: 4, active: true, skills: ["Java","SQL"] }
+
+        employees.push(new_employee)
+        console.log(employees)
+
+    
+        // 39.Remove the last employee using pop().
+
+        employees.pop()
+        // 40.Verify that the original employee dataset remains unchanged when generating reports and sorting copied data.
 
 
 
-        console.log(report)
-        console.log(report_33)
+
+
+        console.log(employees)
+        // console.log(all_employee_skill)
 
 
 
