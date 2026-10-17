@@ -36,7 +36,7 @@
 
         th,
         td {
-            padding: 12px 15px;
+            padding: 12px;
             border: 1px solid #ddd;
             text-align: left;
         }
@@ -53,17 +53,21 @@
             background-color: rgb(205, 81, 81);
 
         }
-        .table-con{
+
+        .table-con {
             width: 100%;
             overflow-x: auto;
         }
-         tr:nth-child(even) {
+
+        tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        tr:hover{
+
+        tr:hover {
             background-color: silver;
         }
-        td:hover{
+
+        td:hover {
             background-color: rgb(208, 142, 56);
         }
     </style>
@@ -275,14 +279,14 @@
 
         console.log("20.Calculate the total annual salary expenditure for active employees, assuming the given salaries are monthly salaries.");
 
-        let total_annual_salary_active = total_salary_active * 12;
+        let total_annual_salary_active = (total_salary_active * 12);
         console.log(total_annual_salary_active);
 
 
         console.log("21.Calculate a 10 % bonus for each active employee using map().");
 
         let bonus_active = active_employees.map((val) => {
-            return { ...val, "Bonus": val.salary * 0.1 }
+            return { ...val, "Bonus": (val.salary * 0.1) }
         })
         console.log(bonus_active);
 
@@ -535,7 +539,7 @@
         const final_report = {
             "Total employee count": employees.length,
             "Active employee count": active_employees.length,
-            "Inactive employee count": employees.length - active_employees.length,
+            "Inactive employee count": (employees.length - active_employees.length),
             "Total monthly payroll": total_salary,
             "Total annual payroll for active employees": total_annual_salary_active,
             "Average salary": average_salary,
