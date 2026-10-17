@@ -5,9 +5,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .main-con {
+            padding: 20px;
+            background-color: burlywood;
+        }
+
+        h1 {
+            text-align: center;
+            color: black;
+            background-color: rgb(116, 116, 161);
+            padding: 10px;
+        }
+
+
+        table {
+            width: 100%;
+            /* margin-top: 30px; */
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: aquamarine;
+            color: rgb(2, 2, 46);
+            font-weight: bold;
+        }
+
+        .table-heading {
+            text-align: center;
+            font-size: large;
+            background-color: rgb(205, 81, 81);
+
+        }
+    </style>
 </head>
 
 <body>
+    <div class="main-con">
+        <h1>Employee Report Generation</h1>
+        <table id="table1">
+        </table>
+        <table id="table2">
+        </table>
+        <h1>Final Executive Report</h1>
+        <table id="table3"></table>
+        <table id="table4"></table>
+        <table id="table5"></table>
+
+
+    </div>
     <script>
         const employees = [
             { id: 101, name: "Arun", department: "IT", salary: 75000, performance: 92, experience: 6, active: true, skills: ["JavaScript", "React"] },
@@ -229,7 +291,7 @@
         //     Below 60: "Needs Improvement"
 
         let per_status = employees.map((val) => {
-            performance = val.performance;
+            let performance = val.performance;
             if (performance >= 90) status = "Excellent";
             else if (performance >= 75) status = "Good";
             else if (performance >= 60) status = "Average";
@@ -244,7 +306,7 @@
         console.log("25.Generate a report containing employee name, current salary, 10 % bonus, and final salary after the bonus.");
 
         let bonus_new_report = employees.map((val) => {
-            bonus = val.salary * 0.1;
+            let bonus = val.salary * 0.1;
             return {
                 "employee name": val.name,
                 "current salary": val.salary,
@@ -263,13 +325,13 @@
 
         console.log("27.Generate a report containing only active employees, sorted by salary in descending order, with their names and salaries.");
 
-        let report_27 = employees_sort_by(active_employees, "salary", "Desc").map((val) => {
+        let report_active_employee = employees_sort_by(active_employees, "salary", "Desc").map((val) => {
             return {
                 "name": val.name,
                 "salary": val.salary
             }
         })
-        console.log(report_27);
+        console.log(report_active_employee);
 
 
         //Part E — Department-Level Analytics
@@ -468,7 +530,186 @@
 
 
         console.log(final_report)
-        // console.log(unchangedemployees)
+
+
+        let tag = ` <thead>
+             <tr>
+                <th colspan=4 class="table-heading">All Employee Detail</th>
+            </tr>
+            <tr>
+                <th>Employee name</th>
+                <th>Current salary</th>
+                <th>10% bonus</th>
+                <th>Final salary after the bonus</th>
+            </tr>
+        </thead>`
+
+        let tr = ""
+        for (i = 0; i < bonus_new_report.length; i++) {
+            let obj = bonus_new_report[i];
+            reportdata = `<tr>
+                <td>${obj["employee name"]}</td>
+                <td>${obj["current salary"]}</td>
+                <td>${obj["10 % bonus"]}</td>
+                <td>${obj["final salary after the bonus"]}</td>
+                </tr>`
+            tr += reportdata;
+        }
+        let body = ` <tbody>${tr}</tbody>`;
+        tag = tag + body;
+
+        document.getElementById("table1").innerHTML = tag;
+
+        let tag1 = ` <thead>
+            <tr>
+                <th colspan=2 class="table-heading">Active Employee Detail</th>
+            </tr>
+            <tr>
+                <th>Employee name</th>
+                <th>Current salary</th>
+            </tr>
+        </thead>`
+
+        let tr1 = ""
+        for (i = 0; i < report_active_employee.length; i++) {
+            let obj = report_active_employee[i];
+            reportdata = `<tr>
+                <td>${obj["name"]}</td>
+                <td>${obj["salary"]}</td>
+                </tr>`
+            tr1 += reportdata;
+        }
+        let body1 = ` <tbody>${tr1}</tbody>`;
+        tag1 = tag1 + body1;
+
+        document.getElementById("table2").innerHTML = tag1;
+
+        let tag2 = ` <thead>
+            <tr>
+                <th>Metrics</th>
+                <th>Value</th>
+            </tr>
+        </thead>`
+
+        let tr2 = `    <tr>
+                            <td>Total employee count</td>
+                            <td>${final_report["Total employee count"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Active employee count</td>
+                            <td>${final_report["Active employee count"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Inactive employee count</td>
+                            <td>${final_report["Inactive employee count"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Total monthly payroll</td>
+                            <td>${final_report["Total monthly payroll"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Total annual payroll for active employees</td>
+                            <td>${final_report["Total annual payroll for active employees"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Average salary</td>
+                            <td>${final_report["Average salary"]}</td>
+
+                       </tr>
+                       <tr>
+                            <td>Highest-paid employee</td>
+                            <td>${final_report["Highest-paid employee"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Lowest-paid employee</td>
+                            <td>${final_report["Lowest-paid employee"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Top three performers</td>
+                            <td>${final_report["Top three performers"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Total bonus expenditure</td>
+                            <td>${final_report["Total bonus expenditure"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Employees requiring performance improvement</td>
+                            <td>${final_report["Employees requiring performance improvement"]}</td>
+                       </tr>
+                       <tr>
+                            <td>Unique skills count</td>
+                            <td>${final_report["Unique skills count"]}</td>
+                       </tr>
+         
+         ` ;
+        let body2 = ` <tbody>${tr2}</tbody>`;
+        tag2 = tag2 + body2;
+
+        document.getElementById("table3").innerHTML = tag2;
+
+        let tag3 = ` <thead>
+            <tr>
+                <th colspan=4 class="table-heading">Department-wise payroll expenditure</th>
+            </tr>
+            <tr>
+                <th>Department</th>
+                <th>Total payroll</th>
+                <th>Employee Count</th>
+                <th>Average Performance</th>
+            </tr>
+        </thead>`
+
+        let tr3 = ""
+        for (i = 0; i < report_by_department.length; i++) {
+            let obj = report_by_department[i];
+            reportdata = `<tr>
+                <td>${obj["department"]}</td>
+                <td>${obj["total payroll"]}</td>
+                <td>${obj["employee_count"]}</td>
+                <td>${obj["average performance"]}</td>
+                </tr>`
+            tr3 += reportdata;
+        }
+        let body3 = ` <tbody>${tr3}</tbody>`;
+        tag3 = tag3 + body3;
+
+        document.getElementById("table4").innerHTML = tag3;
+
+         let tag4 = ` <thead>
+            <tr>
+                <th colspan=7 class="table-heading">Department-wise payroll expenditure</th>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <th>Employee Name</th>
+                <th>Depatment</th>
+                <th>Salary</th>
+                <th>Bonus Percentage</th>
+                <th>Bonus Amount</th>
+                <th>Final Salary</th>
+            </tr>
+        </thead>`
+
+        let tr4 = ""
+        for (i = 0; i < bonus_report.length; i++) {
+            let obj = bonus_report[i];
+            reportdata = `<tr>
+                <td>${obj["id"]}</td>
+                <td>${obj["name"]}</td>
+                <td>${obj["department"]}</td>
+                <td>${obj["salary"]}</td>
+                <td>${obj["bonus percentage"]}</td>
+                <td>${obj["bonus amount"]}</td>
+                <td>${obj["final salary"]}</td>
+                </tr>`
+            tr4 += reportdata;
+        }
+        let body4 = ` <tbody>${tr4}</tbody>`;
+        tag4 = tag4 + body4;
+
+        document.getElementById("table5").innerHTML = tag4;
+
+
 
 
 
