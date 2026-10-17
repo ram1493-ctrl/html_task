@@ -37,6 +37,7 @@
         function employees_filter_by(obj, value, symbol, expected) {
             return obj.filter((val, ind, arr) => {
                 let filter = val[value]
+
                 switch (symbol) {
                     case '>':
                         return filter > expected
@@ -50,7 +51,10 @@
                         return filter == expected
                     case '!=':
                         return filter != expected
+                    case 'includes':
+                        return filter.includes(expected);
                 }
+
             })
         }
         const unchangedemployees = structuredClone(employees);
@@ -59,6 +63,10 @@
             return obj.reduce((sum, val) => {
                 return sum + val[value]
             }, 0)
+        }
+
+        function employees_dataset_validation() {
+            (unchangedemployees.length == employees.length) ? console.log("original employee dataset remains unchanged") : console.log("original employee dataset changed");
         }
 
 
@@ -77,13 +85,15 @@
 
 
         console.log("3.Use includes() to check whether an employee has the AWS skill.");
-        let awscheck = employees.filter((val, ind, arr) => val.skills.includes("AWS"));
+        // let awscheck = employees.filter((val, ind, arr) => val.skills.includes("AWS"));
+        let awscheck = employees_filter_by(employees, "skills", "includes", "AWS");
+
         console.log(awscheck);
 
 
         console.log("4.Use indexOf() to find the position of 'React' in a given skills array.");
 
-        let reactpostition = employees.filter((val, ind, arr) => val.skills.includes("React")).map((val) => {
+        let reactpostition = employees_filter_by(employees, "skills", "includes", "React").map((val) => {
             return { ...val, "React_pos": val.skills.indexOf("React") }
         })
         console.log(reactpostition);
@@ -383,7 +393,7 @@
         employees.push(new_employee);
         console.log(employees);
 
-        (unchangedemployees.length == employees.length) ? console.log("original employee dataset remains unchanged") : console.log("original employee dataset changed");
+        employees_dataset_validation();
 
 
         console.log("39.Remove the last employee using pop().");
@@ -393,7 +403,7 @@
 
         console.log("40.Verify that the original employee dataset remains unchanged when generating reports and sorting copied data.");
 
-        (unchangedemployees.length == employees.length) ? console.log("original employee dataset remains unchanged") : console.log("original employee dataset changed");
+        employees_dataset_validation();
 
 
         //  Part G — Advanced Business Challenge
@@ -430,10 +440,10 @@
         if (ineligible_validation == undefined) console.log(" No ineligible employee appears in the final report");
         else console.log(" Ineligible employee appears in the final report");
 
-
-        (unchangedemployees.length == employees.length) ? console.log("original employee dataset remains unchanged") : console.log("original employee dataset changed");
+        employees_dataset_validation();
 
         // Part H — Final Executive Report
+
 
 
         const final_report = {
