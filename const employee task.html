@@ -53,20 +53,44 @@
             background-color: rgb(205, 81, 81);
 
         }
+        .table-con{
+            width: 100%;
+            overflow-x: auto;
+        }
+         tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover{
+            background-color: silver;
+        }
+        td:hover{
+            background-color: rgb(208, 142, 56);
+        }
     </style>
 </head>
 
 <body>
     <div class="main-con">
         <h1>Employee Report Generation</h1>
-        <table id="table1">
-        </table>
-        <table id="table2">
-        </table>
+        <div class="table-con">
+            <table id="table1"></table>
+        </div>
+        <div class="table-con">
+            <table id="table2"></table>
+        </div>
         <h1>Final Executive Report</h1>
-        <table id="table3"></table>
-        <table id="table4"></table>
-        <table id="table5"></table>
+        <div class="table-con">
+            <table id="table3"></table>
+        </div>
+
+        <div class="table-con">
+            <table id="table4"></table>
+        </div>
+
+        <div class="table-con">
+            <table id="table5"></table>
+        </div>
+
 
 
     </div>
