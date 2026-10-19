@@ -197,7 +197,7 @@
 
         console.log("6.Use every() to verify whether all active employees have a performance score of at least 70.");
 
-        let every_per_atleas_70 = employees_filter_by(employees, "active", "==", true).every((val, ind, arr) => val.performance > 70);
+        let every_per_atleas_70 = employees_filter_by(employees, "active", "==", true).every((val, ind, arr) => val.performance >= 70);
         console.log(every_per_atleas_70);
 
 
