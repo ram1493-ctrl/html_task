@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<!-- <body>
+    <form id="employeeForm">
+        <input id="name" placeholder="Employee name">
+        <input id="email" type="email" placeholder="Email">
+        <button type="submit">Register</button>
+    </form>
+    <div id="message"></div>
+    <div id="employees"></div>
+    <script>
+
+        const records = [
+            { name: "Arun", email: "arun@company.com" }
+        ];
+
+        const form = document.getElementById("employeeForm");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email")
+                .value.trim().toLowerCase();
+            const message = document.getElementById("message");
+
+            if (!name || !email) {
+                message.textContent = "All fields are required";
+                return;
+            }
+
+            if (records.some(e => e.email === email)) {
+                message.textContent = "Email already exists";
+                return;
+            }
+
+            records.push({ name, email });
+            message.textContent = "Employee registered successfully";
+            form.reset();
+        });
+ // const tasks = [
+        //     { title: "Fix Login", priority: 1, due: "2026-10-24", done: false },
+        //     { title: "Update UI", priority: 3, due: "2026-10-30", done: false },
+        //     { title: "Fix Payment", priority: 1, due: "2026-10-25", done: false },
+        //     { title: "Write Docs", priority: 2, due: "2026-10-20", done: true }
+        // ];
+
+        // const today = "2026-10-26";
+
+        // const pending = tasks
+        //     .filter(t => !t.done)
+        //     .map(t => ({
+        //         ...t,
+        //         overdue: t.due < today
+        //     }))
+        //     .sort((a, b) =>
+        //         Number(b.overdue) - Number(a.overdue) ||
+        //         a.priority - b.priority ||
+        //         a.due.localeCompare(b.due)
+        //     );
+
+        // //      const pending1 = tasks
+        // //     .filter(t => !t.done)
+        // //     .map(t => ({
+        // //         ...t,
+        // //         overdue: t.due < today
+        // //     }))
+
+        // // console.table(pending1);
+        // console.table(pending);
+
+        // const sales = [
+        //     { person: "Arun", region: "South", amount: 20000 },
+        //     { person: "Priya", region: "North", amount: 30000 },
+        //     { person: "Arun", region: "South", amount: 15000 },
+        //     { person: "Priya", region: "North", amount: 10000 },
+        //     { person: "Kumar", region: "South", amount: 25000 }
+        // ];
+
+        // const target = 30000;
+
+        // const totals = sales.reduce((map, sale) => {
+        //     map.set(
+        //         sale.person,
+        //         (map.get(sale.person) || 0) + sale.amount
+        //     );
+        //     return map;
+        // }, new Map());
+
+        // console.log("Totals");
+        // console.log(totals);
+
+
+        // const report = [...totals].map(([person, amount]) => ({
+        //     person,
+        //     amount,
+        //     target,
+        //     achieved: amount >= target,
+        //     extra: Math.max(0, amount - target)
+        // }));
+
+        // console.table(report);
+    </script>
+</body> -->
+
+<body>
+    <div id="board"></div>
+
+    <script>       
+
+        let tasks = [
+            { id: 1, title: "Build Login", done: false },
+            { id: 2, title: "Test Payment", done: false },
+            { id: 3, title: "Fix Navbar", done: true }
+        ];
+
+        const board = document.getElementById("board");
+
+        function render() {
+            board.innerHTML = tasks.map(t => `
+        <div>
+            <span>${t.title} - ${t.done ? "Done" : "Pending"}</span>
+            <button data-action="toggle" data-id="${t.id}">Toggle</button>
+            <button data-action="delete" data-id="${t.id}">Delete</button>
+        </div>
+    `).join("");
+        }
+
+        board.addEventListener("click", function (event) {
+            const button = event.target.closest("button");
+            if (!button || !board.contains(button)) return;
+
+            const id = Number(button.dataset.id);
+
+            if (button.dataset.action === "toggle") {
+                const task = tasks.find(t => t.id === id);
+                if (task) task.done = !task.done;
+            }
+            
+
+            if (button.dataset.action === "delete") {
+                tasks = tasks.filter(t => t.id !== id);
+            }
+
+            render();
+        }
+
+        );
+
+        render();
+
+    </script>
+</body>
+
+</html>
