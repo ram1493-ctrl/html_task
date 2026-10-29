@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Performance & Payroll Dashboard</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: gap;
+            gap: 16px;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* KPI Cards Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .kpi-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .kpi-card h3 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .kpi-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Section Layout */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .section-header h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        /* Responsive Tables */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.92rem;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            font-weight: 600;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: #334155;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-active { background: #dcfce7; color: #166534; }
+        .badge-inactive { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Executive HR & Payroll Dashboard</h1>
+                <p class="subtitle">Employee metrics, analytics reports, and salary breakdowns.</p>
+            </div>
+        </header>
+
+        <!-- KPI Metrics Summary Cards -->
+        <div class="kpi-grid" id="kpi-container">
+            <!-- Dynamically populated KPI cards -->
+        </div>
+
+        <!-- Table 3: Executive Summary Metrics -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>Final Executive Metrics Report</h2>
+            </div>
+            <div class="table-responsive">
+                <table id="table3"></table>
+            </div>
+        </div>
+
+        <!-- Table 4: Department-wise Payroll Expenditure -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>Department-wise Payroll & Performance Expenditure</h2>
+            </div>
+            <div class="table-responsive">
+                <table id="table4"></table>
+            </div>
+        </div>
+
+        <!-- Table 5: Final Bonus Eligibility Report -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>Final Bonus Eligibility & Optimization Report</h2>
+            </div>
+            <div class="table-responsive">
+                <table id="table5"></table>
+            </div>
+        </div>
+
+        <!-- Table 1: Employee Bonus & Salary Report -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>Employee Bonus Breakdown</h2>
+            </div>
+            <div class="table-responsive">
+                <table id="table1"></table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Employee Dataset
+        const employees = [
+            { id: 101, name: "Arun", department: "IT", salary: 75000, performance: 92, experience: 6, active: true, skills: ["JavaScript", "React"] },
+            { id: 102, name: "Priya", department: "HR", salary: 48000, performance: 85, experience: 4, active: true, skills: ["Excel", "Recruitment"] },
+            { id: 103, name: "Karthik", department: "IT", salary: 95000, performance: 96, experience: 8, active: true, skills: ["Java", "Spring"] },
+            { id: 104, name: "Divya", department: "Finance", salary: 65000, performance: 78, experience: 5, active: true, skills: ["Excel", "SQL"] },
+            { id: 105, name: "Vijay", department: "IT", salary: 55000, performance: 68, experience: 2, active: true, skills: ["JavaScript", "HTML"] },
+            { id: 106, name: "Meena", department: "Finance", salary: 82000, performance: 91, experience: 7, active: true, skills: ["SQL", "Python"] },
+            { id: 107, name: "Suresh", department: "HR", salary: 42000, performance: 62, experience: 3, active: false, skills: ["Recruitment"] },
+            { id: 108, name: "Nithya", department: "IT", salary: 88000, performance: 89, experience: 5, active: true, skills: ["React", "Node.js"] },
+            { id: 109, name: "Praveen", department: "Sales", salary: 60000, performance: 75, experience: 4, active: true, skills: ["Communication", "CRM"] },
+            { id: 110, name: "Lakshmi", department: "Sales", salary: 72000, performance: 94, experience: 6, active: true, skills: ["CRM", "Analytics"] },
+            { id: 111, name: "Manoj", department: "Finance", salary: 50000, performance: 55, experience: 1, active: false, skills: ["Excel"] },
+            { id: 112, name: "Anitha", department: "IT", salary: 105000, performance: 98, experience: 10, active: true, skills: ["Java", "AWS", "SQL"] }
+        ];
+
+        // Utility Functions
+        function employees_sort_by(obj, value, order) {
+            return [...obj].sort((val1, val2) => order === "Asc" ? val1[value] - val2[value] : val2[value] - val1[value]);
+        }
+
+        function employees_filter_by(obj, value, symbol, expected) {
+            return obj.filter((val) => {
+                let filter = val[value];
+                switch (symbol) {
+                    case '>': return filter > expected;
+                    case '>=': return filter >= expected;
+                    case '<': return filter < expected;
+                    case '<=': return filter <= expected;
+                    case '==': return filter == expected;
+                    case '!=': return filter != expected;
+                    case 'includes': return filter.includes(expected);
+                }
+            });
+        }
+
+        function employees_reduce_by(obj, value) {
+            return obj.reduce((sum, val) => sum + val[value], 0);
+        }
+
+        // Calculations
+        const active_employees = employees_filter_by(employees, "active", "==,", true);
+        const total_salary = employees_reduce_by(employees, "salary");
+        const total_salary_active = employees_reduce_by(active_employees, "salary");
+        const total_annual_salary_active = total_salary_active * 12;
+        const average_salary = (total_salary / employees.length).toFixed(2);
+        const sortbysalary_desc = employees_sort_by(employees, "salary", "Desc");
+
+        const no_of_employee_department = employees.reduce((count, val) => {
+            count[val.department] = (count[val.department] || 0) + 1;
+            return count;
+        }, {});
+
+        const salary_by_department_obj = employees.reduce((count, val) => {
+            count[val.department] = (count[val.department] || 0) + val.salary;
+            return count;
+        }, {});
+
+        const salary_by_department = Object.entries(salary_by_department_obj).map(([department, total_salary]) => ({ department, total_salary }));
+
+        const avg_per_department_obj = employees.reduce((count, val) => {
+            count[val.department] = (count[val.department] || 0) + val.performance;
+            return count;
+        }, {});
+
+        const avg_per_department = Object.entries(avg_per_department_obj).map(([department, total_performance]) => ({
+            department,
+            "average performance": (total_performance / no_of_employee_department[department]).toFixed(2)
+        }));
+
+        const report_by_department = avg_per_department.map((val) => ({
+            ...val,
+            "total payroll": salary_by_department_obj[val.department],
+            "employee_count": no_of_employee_department[val.department]
+        }));
+
+        const bonus_report = employees_sort_by(employees_filter_by(active_employees, "performance", '>=', 80), "salary", "Desc").map((val) => {
+            let bonus = (val.performance >= 95) ? 15 : 10;
+            let bonus_amount = Number((val.salary * bonus / 100).toFixed(2));
+            return {
+                id: val.id,
+                name: val.name,
+                department: val.department,
+                salary: val.salary,
+                "bonus percentage": bonus + '%',
+                "bonus amount": bonus_amount,
+                "final salary": val.salary + bonus_amount
+            };
+        });
+
+        const total_bonus_active = employees_reduce_by(bonus_report, "bonus amount");
+
+        const per_status = employees.map((val) => {
+            let performance = val.performance;
+            let status = performance >= 90 ? "Excellent" : performance >= 75 ? "Good" : performance >= 60 ? "Average" : "Needs Improvement";
+            return { ...val, "performanceStatus": status };
+        });
+
+        const all_employee_skill = employees.reduce((skill, val) => skill.concat(val.skills), []);
+        const all_employee_skill_distinct = [...new Set(all_employee_skill)];
+
+        const final_report = {
+            "Total employee count": employees.length,
+            "Active employee count": active_employees.length,
+            "Inactive employee count": (employees.length - active_employees.length),
+            "Total monthly payroll": '₹' + total_salary.toLocaleString(),
+            "Total annual payroll (Active)": '₹' + total_annual_salary_active.toLocaleString(),
+            "Average salary": '₹' + Number(average_salary).toLocaleString(),
+            "Highest-paid employee": sortbysalary_desc[0].name,
+            "Lowest-paid employee": sortbysalary_desc[sortbysalary_desc.length - 1].name,
+            "Top three performers": employees_sort_by(employees, "performance", "Desc").slice(0, 3).map((val) => val.name).join(", "),
+            "Total bonus expenditure": '₹' + total_bonus_active.toLocaleString(),
+            "Employees needing improvement": employees_filter_by(per_status, "performanceStatus", '==', "Needs Improvement").map((val) => val.name).join(", ") || "None",
+            "Unique skills count": all_employee_skill_distinct.length
+        };
+
+        // Render KPIs
+        document.getElementById("kpi-container").innerHTML = `
+            <div class="kpi-card"><h3>Total Employees</h3><div class="value">${final_report["Total employee count"]}</div></div>
+            <div class="kpi-card"><h3>Active Payroll</h3><div class="value">${final_report["Active employee count"]}</div></div>
+            <div class="kpi-card"><h3>Monthly Payroll</h3><div class="value">${final_report["Total monthly payroll"]}</div></div>
+            <div class="kpi-card"><h3>Average Salary</h3><div class="value">${final_report["Average salary"]}</div></div>
+        `;
+
+        // Render Table 3 (Executive Summary)
+        let tr2 = "";
+        for (const [key, value] of Object.entries(final_report)) {
+            tr2 += `<tr><td><strong>${key}</strong></td><td>${value}</td></tr>`;
+        }
+        document.getElementById("table3").innerHTML = `<thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody>${tr2}</tbody>`;
+
+        // Render Table 4 (Department-wise)
+        let tr3 = "";
+        report_by_department.forEach(obj => {
+            tr3 += `<tr><td>${obj.department}</td><td>₹${obj["total payroll"].toLocaleString()}</td><td>${obj.employee_count}</td><td>${obj["average performance"]}</td></tr>`;
+        });
+        document.getElementById("table4").innerHTML = `<thead><tr><th>Department</th><th>Total Payroll</th><th>Employee Count</th><th>Average Performance</th></tr></thead><tbody>${tr3}</tbody>`;
+
+        // Render Table 5 (Bonus Report)
+        let tr4 = "";
+        bonus_report.forEach(obj => {
+            tr4 += `<tr><td>${obj.id}</td><td>${obj.name}</td><td>${obj.department}</td><td>₹${obj.salary.toLocaleString()}</td><td>${obj["bonus percentage"]}</td><td>₹${obj["bonus amount"].toLocaleString()}</td><td>₹${obj["final salary"].toLocaleString()}</td></tr>`;
+        });
+        document.getElementById("table5").innerHTML = `<thead><tr><th>ID</th><th>Name</th><th>Department</th><th>Salary</th><th>Bonus %</th><th>Bonus Amount</th><th>Final Salary</th></tr></thead><tbody>${tr4}</tbody>`;
+
+        // Render Table 1 (Bonus New Report view)
+        let tr1 = "";
+        employees.forEach(val => {
+            let bonus = val.salary * 0.1;
+            tr1 += `<tr><td>${val.name}</td><td>${val.department}</td><td>₹${val.salary.toLocaleString()}</td><td>₹${bonus.toLocaleString()}</td><td>₹${(val.salary + bonus).toLocaleString()}</td></tr>`;
+        });
+        document.getElementById("table1").innerHTML = `<thead><tr><th>Name</th><th>Department</th><th>Current Salary</th><th>10% Bonus</th><th>Final Salary</th></tr></thead><tbody>${tr1}</tbody>`;
+    </script>
+</body>
+
+</html>

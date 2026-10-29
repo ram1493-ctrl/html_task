@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="head">Heading</h1>
+    <button id="btn">button</button>
+
+    <script>
+        let i = 0;
+
+        let interval1 = setInterval(() => {
+            document.getElementById("head").innerHTML = ++i;
+        }, 1000);
+
+        document.getElementById("btn").onclick = () => {
+            clearInterval(interval1);
+        }
+    </script>
+</body>
+</html>

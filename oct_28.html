@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="main" class="container my-4 d-flex flex-wrap gap-3"></div>
+
+    <!-- <h1 id="head">Heading</h1>
+    <button id="btn"></button> -->
+    <script>
+        //  console.log(10/0);
+        // let input =prompt("Enter any Number");
+
+        // try block: Attempts to execute the code inside it. Since alert("hi") is a valid JavaScript method, it will show an alert box in the browser.
+
+        // catch block: Captures any errors thrown inside the try block and logs them using console.log(error).
+        // try {
+        //     // alerfgt("hi")
+        //     document.getElementById("head1").style.backgroundColor = "red";
+
+
+        // } catch (error) {
+        //     console.log(error)            
+        // }
+
+        let data = fetch("https://dummyjson.com/products")
+            .then(response => response.json())
+            .then(data => {
+                let text = "";
+                data.products.forEach((val, ind, arr) => {
+                    console.log(val)
+                    text += `
+        <div class="card" style="width: 18rem;">
+            <img src="${val.images[0]}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${val.title}</h5>
+                <p class="card-text">${val.description}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+        `
+                })
+                document.getElementById("main").innerHTML = text;
+            })
+
+    </script>
+</body>
+
+</html>

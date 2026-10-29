@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payroll Overview</title>
+  <style>
+    :root {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #202536;
+      background: #f1f3f8;
+      font-synthesis: none;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; padding: 24px; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .app {
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      width: min(1440px, 100%);
+      min-height: calc(100vh - 48px);
+      margin: auto;
+      overflow: hidden;
+      border: 1px solid #e8eaf0;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 10px 35px #20253612;
+    }
+
+    aside {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      padding: 24px 14px;
+      border-right: 1px solid #eceef2;
+    }
+
+    .logo { margin: 0 0 4px 7px; font-size: 19px; }
+    .company, .nav-link { padding: 11px 12px; border-radius: 8px; }
+    .company { border: 1px solid #e8eaf0; font-size: 13px; font-weight: 700; }
+    .nav-title { margin: 0 0 8px 7px; color: #9399a8; font-size: 10px; text-transform: uppercase; }
+    .nav-link { display: block; margin: 3px 0; color: #737b8b; font-size: 13px; }
+    .nav-link.active { background: #edf0ff; color: #4d70eb; font-weight: 700; }
+    .upgrade { margin-top: auto; padding: 14px; border: 1px solid #eceef2; border-radius: 10px; }
+    .upgrade p { color: #737b8b; font-size: 12px; line-height: 1.5; }
+    .upgrade button, .primary {
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 7px;
+      background: #5274ed;
+      color: white;
+      font-weight: 700;
+    }
+    .upgrade button { width: 100%; font-size: 12px; }
+
+    main { min-width: 0; }
+    .topbar {
+      display: flex;
+      min-height: 58px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      border-bottom: 1px solid #eceef2;
+      color: #737b8b;
+      font-size: 13px;
+    }
+    .tabs { display: flex; gap: 22px; height: 58px; align-items: center; }
+    .tab {
+      display: grid;
+      height: 100%;
+      align-items: center;
+      padding: 0;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      color: #737b8b;
+      font-size: inherit;
+      white-space: nowrap;
+    }
+    .tab.active { border-bottom-color: #5274ed; color: #5274ed; }
+    .page-view[hidden] { display: none; }
+    .page-intro { margin: 8px 0 20px; color: #788091; font-size: 13px; }
+    .directory-list { display: grid; gap: 10px; }
+    .directory-item {
+      display: grid;
+      grid-template-columns: minmax(130px, 1.4fr) repeat(3, minmax(100px, 1fr));
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid #eceef2;
+      border-radius: 9px;
+    }
+    .directory-item strong { color: #252b39; }
+    .directory-item span { color: #737b8b; font-size: 12px; }
+    .org-chart { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+    .org-department { padding: 16px; border: 1px solid #e8eaf0; border-radius: 10px; }
+    .org-department h2 { margin: 0 0 12px; color: #5274ed; font-size: 15px; }
+    .org-person { margin-top: 8px; padding: 10px; border-radius: 7px; background: #f7f8fc; font-size: 12px; }
+    .org-person small { display: block; margin-top: 4px; color: #818797; }
+    .profile-layout { display: grid; grid-template-columns: minmax(190px, 0.7fr) minmax(0, 1.6fr); gap: 14px; }
+    .profile-list { display: grid; align-content: start; gap: 7px; }
+    .profile-choice { padding: 11px; border: 1px solid #e8eaf0; border-radius: 7px; background: #fff; color: #50586a; text-align: left; }
+    .profile-choice.active { border-color: #cfd8ff; background: #edf0ff; color: #4365df; }
+    .profile-details { min-height: 230px; }
+    .profile-details h2 { margin: 0 0 6px; font-size: 20px; }
+    .profile-details p { color: #737b8b; font-size: 13px; }
+    .profile-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+    .profile-stat { padding: 14px; border-radius: 8px; background: #f7f8fc; }
+    .profile-stat span { display: block; margin-bottom: 6px; color: #818797; font-size: 11px; }
+    .profile-stat strong { font-size: 15px; }
+    .user { color: #252b39; font-weight: 700; }
+
+    .content { padding: 22px; }
+    .heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    h1 { margin: 0; font-size: 23px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .actions select, .actions button, .filters select, .filters input {
+      min-height: 36px;
+      padding: 0 10px;
+      border: 1px solid #e5e7ed;
+      border-radius: 7px;
+      background: white;
+      color: #50586a;
+      font-size: 12px;
+    }
+
+    .notice { margin: 17px 0; padding: 13px 15px; border: 1px solid #e8eaf0; border-radius: 9px; color: #5e6677; font-size: 12px; line-height: 1.5; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 20px 0; }
+    .metric { padding: 4px 0 5px 14px; border-left: 1px solid #e8eaf0; }
+    .metric:first-child { padding-left: 0; border: 0; }
+    .metric-label { color: #788091; font-size: 12px; }
+    .metric-value { margin: 8px 0 5px; font-size: clamp(22px, 3vw, 30px); font-weight: 700; }
+    .metric-note { color: #37a879; font-size: 11px; }
+
+    .charts { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; }
+    .card { min-width: 0; padding: 17px; border: 1px solid #e8eaf0; border-radius: 12px; background: #fff; }
+    .card h2 { margin: 0; font-size: 14px; }
+    .chart-total { margin: 22px 0 3px; font-size: 25px; font-weight: 700; }
+    .chart-note { color: #37a879; font-size: 11px; }
+    #trendChart { display: block; width: 100%; height: 165px; margin-top: 12px; overflow: visible; }
+    .trend-line { fill: none; stroke: #6284f4; stroke-width: 2.5; }
+    .trend-dot { fill: #6284f4; stroke: #fff; stroke-width: 2; }
+    .trend-label { fill: #858b99; font-size: 11px; text-anchor: middle; }
+    .dept-chart { display: flex; height: 215px; align-items: end; justify-content: space-around; gap: 10px; margin-top: 20px; border-bottom: 1px solid #eceef2; }
+    .dept-column { display: flex; width: 12%; height: 100%; flex-direction: column; justify-content: end; align-items: center; gap: 7px; }
+    .dept-bars { display: flex; width: min(28px, 85%); height: 84%; flex-direction: column; justify-content: end; overflow: hidden; border-radius: 6px; background: #edf0ff; }
+    .dept-bar { min-height: 3px; border-radius: 6px; background: #5274ed; }
+    .dept-label { width: 100%; overflow: hidden; padding-bottom: 8px; color: #818797; font-size: 10px; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+
+    .payroll-card { margin-top: 14px; padding: 0; }
+    .payroll-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 15px 17px; border-bottom: 1px solid #eceef2; }
+    .filters { display: flex; flex-wrap: wrap; gap: 7px; }
+    .filters input { width: 150px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; white-space: nowrap; }
+    th, td { padding: 12px 10px; border-bottom: 1px solid #f0f1f4; text-align: left; }
+    th { background: #fafbfc; color: #858b99; font-size: 11px; font-weight: 500; }
+    td input, td select { width: 100%; min-width: 85px; padding: 6px; border: 1px solid transparent; border-radius: 5px; background: transparent; color: inherit; }
+    td input:hover, td input:focus, td select:hover, td select:focus { border-color: #dfe4f5; outline: none; background: #fff; }
+    .status { display: inline-block; padding: 5px 9px; border-radius: 12px; background: #e9f8ef; color: #31875d; font-size: 11px; }
+    .status.pending { background: #fff5dc; color: #997320; }
+    .add-form { display: grid; grid-template-columns: repeat(5, minmax(100px, 1fr)) auto; gap: 8px; padding: 14px 17px; border-top: 1px solid #eceef2; }
+    .add-form input, .add-form select { min-width: 0; padding: 9px; border: 1px solid #e5e7ed; border-radius: 6px; }
+    .empty { padding: 24px; color: #7e8594; text-align: center; }
+
+    @media (max-width: 800px) {
+      body { padding: 10px; }
+      .app { grid-template-columns: 1fr; }
+      aside { display: none; }
+      .charts { grid-template-columns: 1fr; }
+      .content { padding: 16px; }
+      .topbar { padding: 0 16px; }
+      .tabs { gap: 13px; font-size: 11px; }
+      .add-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .add-form button { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      .topbar { gap: 8px; }
+      .tabs { min-width: 0; gap: 10px; overflow-x: auto; }
+      .user { white-space: nowrap; }
+      .metrics { gap: 8px; }
+      .metric { padding-left: 8px; }
+      .metric-label { font-size: 10px; }
+      .metric-value { font-size: 20px; }
+      .heading { align-items: flex-start; }
+      .actions { width: 100%; }
+      .actions select { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <h2 class="logo">✳ Humaine</h2>
+      <div class="company">▣ &nbsp; Lead Inc.</div>
+      <div>
+        <p class="nav-title">Main menu</p>
+        <div class="nav-link">⌂ &nbsp; Dashboard</div>
+        <div class="nav-link">♙ &nbsp; Employee Directory</div>
+        <div class="nav-link">▤ &nbsp; Attendance &amp; Leave</div>
+        <div class="nav-link">♟ &nbsp; Recruitment</div>
+        <div class="nav-link active">♙ &nbsp; Payroll</div>
+        <div class="nav-link">▥ &nbsp; Performance</div>
+        <div class="nav-link">♧ &nbsp; Reports &amp; Analytics</div>
+      </div>
+      <div>
+        <p class="nav-title">Other</p>
+        <div class="nav-link">⚙ &nbsp; Settings</div>
+        <div class="nav-link">? &nbsp; Help Center</div>
+      </div>
+      <div class="upgrade">
+        <strong>♛ Upgrade to Premium</strong>
+        <p>Unlock advanced analytics and priority support.</p>
+        <button type="button">Upgrade Now</button>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <nav class="tabs" aria-label="Payroll dashboard pages">
+          <button class="tab active" type="button" data-page="overviewPage" aria-current="page">Overview</button>
+          <button class="tab" type="button" data-page="employeeListPage">Employee List</button>
+          <button class="tab" type="button" data-page="organizationPage">Organization Chart</button>
+          <button class="tab" type="button" data-page="profilesPage">Employee Profiles</button>
+        </nav>
+        <span class="user">◉ &nbsp; Rami Malek</span>
+      </header>
+
+      <section class="content page-view" id="overviewPage">
+        <div class="heading">
+          <h1>Payroll Overview</h1>
+          <div class="actions">
+            <select id="departmentFilter" aria-label="Filter by department"></select>
+            <button type="button" id="exportButton">Export Payroll</button>
+            <button type="button" class="primary" id="addEmployeeButton">+ Add Employee</button>
+          </div>
+        </div>
+
+        <div class="notice">ⓘ &nbsp; Dashboard data updates when you edit the employee rows or add a new employee.</div>
+
+        <section class="metrics" aria-label="Payroll summary">
+          <div class="metric"><div class="metric-label">Total Payroll This Month</div><div class="metric-value" id="totalPayroll">$0</div><div class="metric-note">Based on the selected department</div></div>
+          <div class="metric"><div class="metric-label">Total Employees Paid</div><div class="metric-value" id="paidCount">0</div><div class="metric-note">Employees with Paid status</div></div>
+          <div class="metric"><div class="metric-label">Average Salary</div><div class="metric-value" id="averageSalary">$0</div><div class="metric-note">Average total salary</div></div>
+        </section>
+
+        <section class="charts">
+          <article class="card">
+            <h2>Monthly Payroll Trend</h2>
+            <div class="chart-total" id="trendTotal">$0</div>
+            <div class="chart-note">Current month payroll</div>
+            <svg id="trendChart" viewBox="0 0 600 180" role="img" aria-label="Monthly payroll trend"></svg>
+          </article>
+          <article class="card">
+            <h2>Payroll Distribution by Department</h2>
+            <div class="chart-total" id="departmentTotal">$0</div>
+            <div class="chart-note">Total salary by department</div>
+            <div class="dept-chart" id="departmentChart" role="img" aria-label="Payroll by department"></div>
+          </article>
+        </section>
+
+        <section class="card payroll-card">
+          <div class="payroll-header">
+            <h2>Payroll List</h2>
+            <div class="filters">
+              <input id="searchInput" type="search" placeholder="Search employee" aria-label="Search employee">
+              <select id="statusFilter" aria-label="Filter by status">
+                <option value="All">All statuses</option>
+                <option value="Paid">Paid</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Department</th><th>Pay Date</th><th>Status</th><th>Base Salary</th><th>Bonus</th><th>Total Salary</th></tr></thead>
+              <tbody id="payrollRows"></tbody>
+            </table>
+          </div>
+          <form class="add-form" id="employeeForm">
+            <input name="name" placeholder="Employee name" required>
+            <input name="department" placeholder="Department" required>
+            <input name="payDate" type="date" required>
+            <select name="status"><option>Paid</option><option>Pending</option></select>
+            <input name="baseSalary" type="number" min="0" placeholder="Base salary" required>
+            <input name="bonus" type="number" min="0" placeholder="Bonus" required>
+            <button class="primary" type="submit">Add employee</button>
+          </form>
+        </section>
+      </section>
+
+      <section class="content page-view" id="employeeListPage" hidden>
+        <h1>Employee List</h1>
+        <p class="page-intro">Browse employees and their current payroll information.</p>
+        <div class="card">
+          <div class="filters" style="margin-bottom: 14px;">
+            <input id="directorySearch" type="search" placeholder="Search employees" aria-label="Search employees">
+          </div>
+          <div class="directory-list" id="directoryList"></div>
+        </div>
+      </section>
+
+      <section class="content page-view" id="organizationPage" hidden>
+        <h1>Organization Chart</h1>
+        <p class="page-intro">Employees grouped by department.</p>
+        <div class="org-chart" id="organizationChart"></div>
+      </section>
+
+      <section class="content page-view" id="profilesPage" hidden>
+        <h1>Employee Profiles</h1>
+        <p class="page-intro">Select an employee to view their payroll profile.</p>
+        <div class="profile-layout">
+          <div class="profile-list card" id="profileList"></div>
+          <article class="profile-details card" id="profileDetails"></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Payroll records are plain JavaScript objects. Edit or add records to update the dashboard.
+    const payrollData = {
+      employees: [
+        { name: "John Doe", department: "Marketing", payDate: "2025-03-31", status: "Paid", baseSalary: 4000, bonus: 500 },
+        { name: "Jane Smith", department: "IT", payDate: "2025-03-31", status: "Paid", baseSalary: 5200, bonus: 300 },
+        { name: "Alex Johnson", department: "Finance", payDate: "2025-03-31", status: "Paid", baseSalary: 4600, bonus: 450 },
+        { name: "Sam Lee", department: "HR", payDate: "2025-03-31", status: "Pending", baseSalary: 3800, bonus: 200 },
+        { name: "Taylor Brown", department: "Operations", payDate: "2025-03-31", status: "Paid", baseSalary: 4100, bonus: 250 },
+        { name: "Morgan Davis", department: "Marketing", payDate: "2025-03-31", status: "Paid", baseSalary: 3900, bonus: 350 },
+        { name: "Casey Wilson", department: "Finance", payDate: "2025-03-31", status: "Pending", baseSalary: 4300, bonus: 300 }
+      ],
+      months: [
+        { label: "Oct", total: 248000 },
+        { label: "Nov", total: 239000 },
+        { label: "Dec", total: 273500 },
+        { label: "Jan", total: 251000 },
+        { label: "Feb", total: 215000 },
+        { label: "Mar", total: 226000 }
+      ]
+    };
+
+    const money = amount => new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0
+    }).format(amount);
+
+    const totalFor = employee => Number(employee.baseSalary || 0) + Number(employee.bonus || 0);
+    const departmentFilter = document.getElementById("departmentFilter");
+
+    function getFilteredEmployees() {
+      const department = departmentFilter.value || "All";
+      return payrollData.employees.filter(employee => department === "All" || employee.department === department);
+    }
+
+    function renderDepartmentFilter() {
+      const previousValue = departmentFilter.value || "All";
+      const departments = [...new Set(payrollData.employees.map(employee => employee.department))].sort();
+      departmentFilter.innerHTML = '<option value="All">All departments</option>' +
+        departments.map(department => `<option value="${escapeHtml(department)}">${escapeHtml(department)}</option>`).join("");
+      departmentFilter.value = departments.includes(previousValue) ? previousValue : "All";
+    }
+
+    function renderSummary(employees) {
+      const paidEmployees = employees.filter(employee => employee.status === "Paid");
+      const payrollTotal = paidEmployees.reduce((sum, employee) => sum + totalFor(employee), 0);
+      document.getElementById("totalPayroll").textContent = money(payrollTotal);
+      document.getElementById("departmentTotal").textContent = money(payrollTotal);
+      document.getElementById("trendTotal").textContent = money(payrollTotal);
+      document.getElementById("paidCount").textContent = paidEmployees.length;
+      document.getElementById("averageSalary").textContent = money(paidEmployees.length ? payrollTotal / paidEmployees.length : 0);
+      renderTrend(payrollTotal);
+    }
+
+    function renderTrend(currentTotal) {
+      const months = payrollData.months.map(month => ({ ...month }));
+      months[months.length - 1].total = currentTotal;
+      const max = Math.max(...months.map(month => month.total), 1);
+      const points = months.map((month, index) => {
+        const x = 35 + index * 106;
+        const y = 145 - (month.total / max) * 100;
+        return { x, y, label: month.label };
+      });
+      const line = points.map(point => `${point.x},${point.y}`).join(" ");
+      const dots = points.map(point => `<circle class="trend-dot" cx="${point.x}" cy="${point.y}" r="6"><title>${point.label}: ${money(months.find(month => month.label === point.label).total)}</title></circle><text class="trend-label" x="${point.x}" y="173">${escapeHtml(point.label)}</text>`).join("");
+      document.getElementById("trendChart").innerHTML = `<polyline class="trend-line" points="${line}"></polyline>${dots}`;
+    }
+
+    function renderDepartments(employees) {
+      const totals = {};
+      employees.filter(employee => employee.status === "Paid").forEach(employee => {
+        totals[employee.department] = (totals[employee.department] || 0) + totalFor(employee);
+      });
+      const entries = Object.entries(totals).sort((a, b) => b[1] - a[1]);
+      const max = Math.max(...entries.map(([, value]) => value), 1);
+      document.getElementById("departmentChart").innerHTML = entries.length
+        ? entries.map(([department, amount]) => `
+          <div class="dept-column" title="${escapeHtml(department)}: ${money(amount)}">
+            <div class="dept-bars"><div class="dept-bar" style="height:${Math.max(4, amount / max * 100)}%"></div></div>
+            <span class="dept-label">${escapeHtml(department)}</span>
+          </div>`).join("")
+        : '<p class="empty">No paid payroll data</p>';
+    }
+
+    function renderTable() {
+      const search = document.getElementById("searchInput").value.trim().toLowerCase();
+      const status = document.getElementById("statusFilter").value;
+      const rows = payrollData.employees
+        .map((employee, index) => ({ employee, index }))
+        .filter(({ employee }) => employee.name.toLowerCase().includes(search))
+        .filter(({ employee }) => status === "All" || employee.status === status);
+
+      document.getElementById("payrollRows").innerHTML = rows.length
+        ? rows.map(({ employee, index }) => `
+          <tr>
+            <td><input aria-label="Employee name" data-index="${index}" data-field="name" value="${escapeHtml(employee.name)}"></td>
+            <td><input aria-label="Department" data-index="${index}" data-field="department" value="${escapeHtml(employee.department)}"></td>
+            <td><input aria-label="Pay date" type="date" data-index="${index}" data-field="payDate" value="${escapeHtml(employee.payDate)}"></td>
+            <td><select aria-label="Payroll status" data-index="${index}" data-field="status">
+              <option${employee.status === "Paid" ? " selected" : ""}>Paid</option>
+              <option${employee.status === "Pending" ? " selected" : ""}>Pending</option>
+            </select></td>
+            <td><input aria-label="Base salary" type="number" min="0" data-index="${index}" data-field="baseSalary" value="${Number(employee.baseSalary)}"></td>
+            <td><input aria-label="Bonus" type="number" min="0" data-index="${index}" data-field="bonus" value="${Number(employee.bonus)}"></td>
+            <td><strong>${money(totalFor(employee))}</strong></td>
+          </tr>`).join("")
+        : '<tr><td class="empty" colspan="7">No employees match your search.</td></tr>';
+    }
+
+    let selectedProfile = 0;
+
+    function renderEmployeeList() {
+      const search = document.getElementById("directorySearch").value.trim().toLowerCase();
+      const employees = payrollData.employees.filter(employee =>
+        `${employee.name} ${employee.department}`.toLowerCase().includes(search)
+      );
+      document.getElementById("directoryList").innerHTML = employees.length
+        ? employees.map(employee => `
+          <div class="directory-item">
+            <strong>${escapeHtml(employee.name)}</strong>
+            <span>${escapeHtml(employee.department)}</span>
+            <span>${escapeHtml(employee.status)}</span>
+            <span>${money(totalFor(employee))}</span>
+          </div>`).join("")
+        : '<p class="empty">No employees found.</p>';
+    }
+
+    function renderOrganization() {
+      const groups = payrollData.employees.reduce((departments, employee) => {
+        if (!departments[employee.department]) departments[employee.department] = [];
+        departments[employee.department].push(employee);
+        return departments;
+      }, {});
+      const organization = Object.entries(groups);
+      document.getElementById("organizationChart").innerHTML = organization.length
+        ? organization.map(([department, employees]) => `
+          <article class="org-department">
+            <h2>${escapeHtml(department)}</h2>
+            ${employees.map(employee => `
+              <div class="org-person">${escapeHtml(employee.name)}<small>${escapeHtml(employee.status)} · ${money(totalFor(employee))}</small></div>
+            `).join("")}
+          </article>`).join("")
+        : '<p class="empty">No employees to display.</p>';
+    }
+
+    function renderProfiles() {
+      if (!payrollData.employees.length) {
+        document.getElementById("profileList").innerHTML = '<p class="empty">No employees to display.</p>';
+        document.getElementById("profileDetails").innerHTML = "";
+        return;
+      }
+      selectedProfile = Math.min(selectedProfile, payrollData.employees.length - 1);
+      document.getElementById("profileList").innerHTML = payrollData.employees.map((employee, index) => `
+        <button class="profile-choice${index === selectedProfile ? " active" : ""}" type="button" data-profile="${index}">
+          ${escapeHtml(employee.name)}<br><small>${escapeHtml(employee.department)}</small>
+        </button>`).join("");
+
+      const employee = payrollData.employees[selectedProfile];
+      document.getElementById("profileDetails").innerHTML = `
+        <h2>${escapeHtml(employee.name)}</h2>
+        <p>Employee payroll profile</p>
+        <div class="profile-stats">
+          <div class="profile-stat"><span>Department</span><strong>${escapeHtml(employee.department)}</strong></div>
+          <div class="profile-stat"><span>Payroll status</span><strong>${escapeHtml(employee.status)}</strong></div>
+          <div class="profile-stat"><span>Base salary</span><strong>${money(Number(employee.baseSalary || 0))}</strong></div>
+          <div class="profile-stat"><span>Bonus</span><strong>${money(Number(employee.bonus || 0))}</strong></div>
+          <div class="profile-stat"><span>Total salary</span><strong>${money(totalFor(employee))}</strong></div>
+          <div class="profile-stat"><span>Pay date</span><strong>${escapeHtml(employee.payDate)}</strong></div>
+        </div>`;
+    }
+
+    function renderOtherPages() {
+      renderEmployeeList();
+      renderOrganization();
+      renderProfiles();
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[character]);
+    }
+
+    function renderDashboard() {
+      const employees = getFilteredEmployees();
+      renderSummary(employees);
+      renderDepartments(employees);
+      renderTable();
+      renderOtherPages();
+    }
+
+    document.querySelector(".tabs").addEventListener("click", event => {
+      const tab = event.target.closest("[data-page]");
+      if (!tab) return;
+      document.querySelectorAll(".tabs .tab").forEach(button => {
+        const isActive = button === tab;
+        button.classList.toggle("active", isActive);
+        if (isActive) button.setAttribute("aria-current", "page");
+        else button.removeAttribute("aria-current");
+      });
+      document.querySelectorAll(".page-view").forEach(page => {
+        page.hidden = page.id !== tab.dataset.page;
+      });
+    });
+
+    document.getElementById("directorySearch").addEventListener("input", renderEmployeeList);
+    document.getElementById("profileList").addEventListener("click", event => {
+      const button = event.target.closest("[data-profile]");
+      if (!button) return;
+      selectedProfile = Number(button.dataset.profile);
+      renderProfiles();
+    });
+
+    document.getElementById("payrollRows").addEventListener("input", event => {
+      const field = event.target.dataset.field;
+      if (!field || event.target.tagName === "SELECT") return;
+      const employee = payrollData.employees[Number(event.target.dataset.index)];
+      employee[field] = field === "baseSalary" || field === "bonus" ? Number(event.target.value) : event.target.value;
+      const cell = event.target.closest("tr").lastElementChild;
+      cell.innerHTML = `<strong>${money(totalFor(employee))}</strong>`;
+      if (field === "department") renderDepartmentFilter();
+      const filteredEmployees = getFilteredEmployees();
+      renderSummary(filteredEmployees);
+      renderDepartments(filteredEmployees);
+      renderOtherPages();
+    });
+
+    document.getElementById("payrollRows").addEventListener("change", event => {
+      if (event.target.dataset.field === "status") {
+        payrollData.employees[Number(event.target.dataset.index)].status = event.target.value;
+        renderDashboard();
+      }
+    });
+
+    document.getElementById("employeeForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      payrollData.employees.push({
+        name: formData.get("name").trim(),
+        department: formData.get("department").trim(),
+        payDate: formData.get("payDate"),
+        status: formData.get("status"),
+        baseSalary: Number(formData.get("baseSalary")),
+        bonus: Number(formData.get("bonus"))
+      });
+      event.currentTarget.reset();
+      renderDepartmentFilter();
+      renderDashboard();
+    });
+
+    departmentFilter.addEventListener("change", renderDashboard);
+    document.getElementById("searchInput").addEventListener("input", renderTable);
+    document.getElementById("statusFilter").addEventListener("change", renderTable);
+    document.getElementById("addEmployeeButton").addEventListener("click", () => {
+      document.getElementById("employeeForm").scrollIntoView({ behavior: "smooth", block: "center" });
+      document.querySelector('#employeeForm input[name="name"]').focus();
+    });
+    document.getElementById("exportButton").addEventListener("click", () => {
+      const csvRows = [
+        ["Name", "Department", "Pay Date", "Status", "Base Salary", "Bonus", "Total Salary"],
+        ...payrollData.employees.map(employee => [
+          employee.name, employee.department, employee.payDate, employee.status,
+          employee.baseSalary, employee.bonus, totalFor(employee)
+        ])
+      ];
+      const csv = csvRows.map(row => row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(",")).join("\n");
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+      link.download = "payroll.csv";
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+
+    renderDepartmentFilter();
+    renderDashboard();
+  </script>
+</body>
+</html>

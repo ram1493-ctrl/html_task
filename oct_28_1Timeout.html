@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="head">Heading</h1>
+    <button id="btn"></button>
+    <script>
+
+        // setTimeout(): Sets a timer to execute a function once after a specified delay.   
+        // 3000: Represents the delay time in milliseconds (3 seconds).
+        let timeOut = setTimeout(() => {
+            document.getElementById("head").style.backgroundColor = "red";
+        }, 5000)
+
+        document.getElementById("btn").onclick = () => {
+            clearTimeout(timeOut);
+        }
+    </script>
+</body>
+
+</html>
