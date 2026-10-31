@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        const employees = [
+            { id: 101, name: "Arun", department: "IT", salary: 75000, performance: 92, experience: 6, active: true, skills: ["JavaScript", "React"] },
+            { id: 102, name: "Priya", department: "HR", salary: 48000, performance: 85, experience: 4, active: true, skills: ["Excel", "Recruitment"] },
+            { id: 103, name: "Karthik", department: "IT", salary: 95000, performance: 96, experience: 8, active: true, skills: ["Java", "Spring"] },
+            { id: 104, name: "Divya", department: "Finance", salary: 65000, performance: 78, experience: 5, active: true, skills: ["Excel", "SQL"] },
+            { id: 105, name: "Vijay", department: "IT", salary: 55000, performance: 68, experience: 2, active: true, skills: ["JavaScript", "HTML"] },
+            { id: 106, name: "Meena", department: "Finance", salary: 82000, performance: 91, experience: 7, active: true, skills: ["SQL", "Python"] },
+            { id: 107, name: "Suresh", department: "HR", salary: 42000, performance: 62, experience: 3, active: false, skills: ["Recruitment"] },
+            { id: 108, name: "Nithya", department: "IT", salary: 88000, performance: 89, experience: 5, active: true, skills: ["React", "Node.js"] },
+            { id: 109, name: "Praveen", department: "Sales", salary: 60000, performance: 75, experience: 4, active: true, skills: ["Communication", "CRM"] },
+            { id: 110, name: "Lakshmi", department: "Sales", salary: 72000, performance: 94, experience: 6, active: true, skills: ["CRM", "Analytics"] },
+            { id: 111, name: "Manoj", department: "Finance", salary: 50000, performance: 55, experience: 1, active: false, skills: ["Excel"] },
+            { id: 112, name: "Anitha", department: "IT", salary: 105000, performance: 98, experience: 10, active: true, skills: ["Java", "AWS", "SQL"] }
+        ];
+
+        function getData(employeeId) {
+            return new Promise((resolve, rejected) => {
+                setTimeout(() => {
+                    employee = employees.find(val => val.id === employeeId)
+                    if (employee) {
+                        resolve(employee)
+                    } else {
+                        rejected("Employee Not Found..")
+                    }
+                }, 5000)
+            })
+        }
+
+        async function display() {
+            console.log("checking data");
+            const data = await getData(105);
+            console.log(data);
+            if (data.name) {
+                console.log("Process Completed")
+            } else {
+                console.log("Process incomplete")
+            }
+        }
+        display()
+    </script>
+</body>
+
+</html>

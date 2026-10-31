@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const d = fetch("https://dummyjson.com/products")
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.products);
+                let a = JSON.stringify(data.products, ["id", "title", "description"], 8);
+                let b = JSON.parse(a);
+                console.log(b);
+            })
+    </script>
+</body>
+
+</html>

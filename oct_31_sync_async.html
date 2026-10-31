@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <Script>
+        // In synchronous JavaScript, tasks are executed one after another in a blocking manner. Each operation waits for the previous one to finish before proceeding. For example:
+
+        //Synchronous programming executes code in sequence, where each statement waits for the previous one to complete before running. 
+
+        console.log("Task 1");
+        console.log("Task 2");
+        console.log("Task 3");
+        Copy
+//         Output:
+
+                // Task 1
+                // Task 2
+                // Task 3
+        
+        // In contrast, asynchronous JavaScript allows tasks to run independently, enabling non - blocking execution.For example:
+
+        // Asynchronous programming,, allows multiple tasks to run independently of each other. In asynchronous code, a task can be initiated, and while waiting for it to complete, other tasks can proceed.
+
+        console.log("Task 1");
+        setTimeout(() => console.log("Task 2"), 1000);
+        console.log("Task 3");
+        Copy
+//         Output:
+
+                // Task 1
+                // Task 3
+                // Task 2
+                        
+        // Here, Task 2 is delayed and executed later without blocking the execution of Task 3
+    </Script>
+</body>
+
+</html>
