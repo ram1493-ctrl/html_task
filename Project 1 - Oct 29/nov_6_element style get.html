@@ -1,0 +1,29 @@
+<!html lang="en">
+<head>
+    <style>
+        #head{
+            width: 400px;
+            height: 400px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="head" class="heading" style="background-color: aqua; color: orange;">Javascript</h1>
+
+    <script>
+        let ele = document.getElementById("head");
+        console.log(ele);
+        console.log(ele.id);
+        console.log(ele.className);
+        console.log(ele.style.backgroundColor);
+        console.log(ele.style.color);
+        // console.log(ele.style.width);
+        // console.log(ele.style.height);
+        let ele1 = window.getComputedStyle(ele).getPropertyValue("width");
+        console.log(ele1);
+    </script>
+
+</body>
+</html>

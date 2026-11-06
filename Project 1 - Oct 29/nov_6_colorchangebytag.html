@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color H1 Elements</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>First Heading</h1>
+    <h1>Second Heading</h1>
+    <h1>Third Heading</h1>
+    <h1>Fourth Heading</h1>
+    <h1>Fifth Heading</h1>
+    <h1>Sixth Heading</h1>
+
+    <script>
+        // 1. Select all h1 elements
+        const elements = document.querySelectorAll('h1');
+
+        // 2. Define an array of different colors
+        const colors = ['#e74c3c', '#3498db', '#2ecc71', '#9b59b6', '#f39c12', '#e67e22'];
+
+        // 3. Loop through and apply a different color to each
+        elements.forEach((el, index) => {
+            el.style.backgroundColor = colors[index % colors.length];
+        });
+
+        // i=0;
+        // for(let ele of elements){
+        //     ele.style.backgroundColor = colors[i];
+        //     ++i;
+        // }
+
+
+        // let elements1 = document.getElementsByTagName("h1");
+        let elements1 = document.getElementsByClassName("heading");
+        console.log(elements);
+        console.log(elements[0]);
+
+
+        Array.from(elements1).forEach((val, ind, arr) => {
+            // val.style.backgroundColor = array[ind];
+            console.log(val);
+
+
+    </script>
+
+</body>
+
+</html>

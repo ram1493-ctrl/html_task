@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Supermarket Billing System</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success: #16a34a;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --border: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 32px 16px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 12px;
+            margin-bottom: 24px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        input {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            height: 42px;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .actions-col {
+            width: 80px;
+            text-align: center;
+        }
+
+        .btn-delete {
+            background-color: #ef4444;
+            padding: 6px 10px;
+            font-size: 14px;
+            height: auto;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
+        }
+
+        .totals-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 16px;
+            margin-bottom: 24px;
+        }
+
+        .total-row {
+            display: flex;
+            gap: 32px;
+            font-size: 18px;
+        }
+
+        .total-row.grand-total {
+            font-size: 21px;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .footer-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+        }
+
+        .btn-print {
+            background-color: #475569;
+        }
+
+        .btn-print:hover {
+            background-color: #334155;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .input-row,
+            .footer-actions,
+            .actions-col,
+            th.actions-col {
+                display: none;
+            }
+
+            h1 {
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Supermarket Billing System</h1>
+
+        <div class="input-row">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" placeholder="e.g. Rice, Milk, Sugar, Pen">
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" min="1" value="1">
+            </div>
+            <div class="form-group">
+                <label for="price">Price (₹)</label>
+                <input type="number" id="price" min="0" step="0.01" placeholder="0.00">
+            </div>
+            <button id="addBtn" onclick="addItem()">Add Item</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th class="text-right">Quantity</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Total</th>
+                    <th class="actions-col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="cartTableBody">
+            </tbody>
+        </table>
+
+        <div class="totals-section">
+            <div class="total-row grand-total">
+                <span>Grand Total:</span>
+                <span id="grandTotal">₹0.00</span>
+            </div>
+        </div>
+
+        <div class="footer-actions">
+            <button class="btn-print" onclick="window.print()">Print / Save Bill</button>
+            <button onclick="clearBill()">New Bill</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        addtoCart();
+
+        function addItem() {
+            const nameInput = document.getElementById('productName');
+            const qtyInput = document.getElementById('quantity');
+            const priceInput = document.getElementById('price');
+
+            const name = nameInput.value.trim();
+            const quantity = parseInt(qtyInput.value);
+            const price = parseFloat(priceInput.value);
+
+            if (!name) {
+                alert('Please enter a product name.');
+                nameInput.focus();
+                return;
+            }
+            if (isNaN(quantity) || quantity <= 0) {
+                alert('Please enter a valid quantity.');
+                qtyInput.focus();
+                return;
+            }
+            if (isNaN(price) || price < 0) {
+                alert('Please enter a valid price.');
+                priceInput.focus();
+                return;
+            }
+
+
+            const existingIndex = cart.findIndex(item => item.name.toLowerCase() === name.toLowerCase() && item.price === price);
+
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += quantity;
+            } else {
+                cart.push({ name, quantity, price });
+            }
+
+            nameInput.value = '';
+            qtyInput.value = '1';
+            priceInput.value = '';
+            nameInput.focus();
+
+            addtoCart();
+        }
+
+        function deleteItem(index) {
+            cart.splice(index, 1);
+            addtoCart();
+        }
+
+        function clearBill() {
+            if (cart.length > 0) {
+                const confirmed = confirm('Are you sure you want to start a new bill? All current items will be cleared.');
+                if (!confirmed) {
+                    return;
+                }
+            }
+            cart = [];
+            addtoCart();
+        }
+
+        function addtoCart() {
+            const tbody = document.getElementById('cartTableBody');
+            const grandTotalEl = document.getElementById('grandTotal');
+
+            tbody.innerHTML = '';
+            let grandTotal = 0;
+
+            if (cart.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #94a3b8; padding: 32px;">No items added yet.</td></tr>`;
+                grandTotalEl.textContent = '₹0.00';
+                return;
+            }
+
+            cart.forEach((val, index) => {
+                const itemTotal = val.quantity * val.price;
+                grandTotal += itemTotal;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${(val.name)}</td>
+                    <td class="text-right">${val.quantity}</td>
+                    <td class="text-right">₹${val.price.toFixed(2)}</td>
+                    <td class="text-right">₹${itemTotal.toFixed(2)}</td>
+                    <td class="actions-col">
+                        <button class="btn-delete" onclick="deleteItem(${index})">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            grandTotalEl.textContent = `₹${grandTotal.toFixed(2)}`;
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                addItem();
+            }
+        });
+
+    </script>
+</body>
+
+</html>
