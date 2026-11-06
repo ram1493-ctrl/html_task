@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7fb">
+  <meta name="description" content="A local-first student management and performance analytics system.">
+  <title>Student Management | MrGenie Institute</title>
+  <link rel="stylesheet" href="css/project.css">
+  <script src="js/project.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-view="dashboard" aria-label="MrGenie Institute dashboard">
+        <span class="brand-mark" aria-hidden="true">m</span>
+        <span class="brand-copy"><strong>mrgenie</strong><small>Institute manager</small></span>
+      </a>
+      <div class="nav-caption">Workspace</div>
+      <nav class="primary-nav" aria-label="Main navigation">
+        <button class="nav-link is-active" data-view="dashboard"><span class="nav-icon" aria-hidden="true">◫</span>Overview</button>
+        <button class="nav-link" data-view="students"><span class="nav-icon" aria-hidden="true">♙</span>Students<span class="nav-count" id="studentNavCount">0</span></button>
+        <button class="nav-link" data-view="attendance"><span class="nav-icon" aria-hidden="true">▦</span>Attendance</button>
+        <button class="nav-link" data-view="tasks"><span class="nav-icon" aria-hidden="true">✓</span>Tasks</button>
+        <button class="nav-link" data-view="activities"><span class="nav-icon" aria-hidden="true">✦</span>Activities</button>
+        <button class="nav-link" data-view="analysis"><span class="nav-icon" aria-hidden="true">⌁</span>Analysis</button>
+        <button class="nav-link" data-view="reports"><span class="nav-icon" aria-hidden="true">▤</span>Reports</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="storage-card">
+          <span class="storage-icon" aria-hidden="true">▣</span>
+          <div><strong>Private by design</strong><p>Your data stays in this browser.</p></div>
+        </div>
+        <button class="nav-link" data-view="data"><span class="nav-icon" aria-hidden="true">⚙</span>Data &amp; settings</button>
+        <div class="sidebar-user">
+          <span class="avatar avatar-small">MG</span>
+          <span><strong>Institute admin</strong><small>Local workspace</small></span>
+          <span class="online-dot" aria-label="Offline-ready"></span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><span class="breadcrumb-sep">/</span><strong id="currentPageName">Overview</strong></div>
+        <div class="topbar-actions">
+          <span class="today-label" id="todayLabel"></span>
+          <button class="button button-primary button-small" data-action="add-student"><span aria-hidden="true">＋</span> Add student</button>
+        </div>
+      </header>
+
+      <main id="mainContent">
+        <section class="page-view is-visible" id="dashboardView" aria-labelledby="dashboardTitle"></section>
+        <section class="page-view" id="studentsView" aria-labelledby="studentsTitle"></section>
+        <section class="page-view" id="attendanceView" aria-labelledby="attendanceTitle"></section>
+        <section class="page-view" id="tasksView" aria-labelledby="tasksTitle"></section>
+        <section class="page-view" id="activitiesView" aria-labelledby="activitiesTitle"></section>
+        <section class="page-view" id="analysisView" aria-labelledby="analysisTitle"></section>
+        <section class="page-view" id="reportsView" aria-labelledby="reportsTitle"></section>
+        <section class="page-view" id="dataView" aria-labelledby="dataTitle"></section>
+      </main>
+      <footer class="app-footer"><span>MrGenie Institute · Student Management System</span><span>Local browser storage <span class="footer-dot">●</span></span></footer>
+    </div>
+  </div>
+
+  <div class="sidebar-scrim" id="sidebarScrim"></div>
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  <dialog class="app-dialog" id="appDialog" aria-labelledby="dialogTitle">
+    <div id="dialogContent"></div>
+  </dialog>
+</body>
+</html>
+
