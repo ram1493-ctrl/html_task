@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        span {
+            width: 100px;
+            height: 30px;
+            background-color: black;
+            color: whitesmoke;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .con {
+            width: 200px;
+            height: 200px;
+            background-color: coral;
+            margin-top: 10px;
+        }
+
+        input {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* button{
+             display: flex;
+            align-items: center;
+        } */
+    </style>
+</head>
+
+<body>
+    <p id="para" class="para">This is Para <span id="btn">Click</span></p>
+    <button id="stop">Stop</button>
+
+    <div class="con"></div>
+    <input type="text" id="input" placeholder="Click or type here...">
+    <button>Click Me</button>
+
+    <!-- <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                $(".con").toggle(3000, function () {
+                    alert("Animation finished!");
+                });
+            });
+        });
+    </script> -->
+    <!-- <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                $(".con").css("background-color", "yellow");
+            });
+
+            $(".con").mouseenter(function () {
+                $(".con").css("width", "80%");
+            });
+
+            $(".con").mouseleave(function () {
+                $(".con").css("width", "100%");
+            });
+        });
+    </script> -->
+    <!-- <script>
+        $(document).ready(function () {
+            $("#input").focus(function () {
+                $(this).css({ "outline": "2px solid red", "color": "green" });
+            });
+
+            $("#input").blur(function () {
+                $(this).css({ "outline": "2px solid black", "color": "yellow" });
+            });
+        });
+    </script> -->
+    <!-- <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                var con = $(".con");
+                con.toggle(3000, function () {
+                    con.css("background-color", "yellow");
+                });
+            });
+        });
+    </script> -->
+    <!-- <script>
+        $(document).ready(function () {
+        // $("#btn").click(function(){
+        //     var con = $(".con");
+        //     con.slideUp(3000)
+        // })
+        // $("button").click(function(){
+        //     var con = $(".con");
+        //     con.slideDown(3000)
+        // // })
+        $("#btn").click(function () {
+            var con = $(".con");
+            con.slideToggle(3000)
+        })
+
+        $("#stop").click(function () {
+            var con = $(".con");
+            con.stop(3000)
+        })
+
+    </script> -->
+    <script>
+         $(document).ready(function () {
+            $("#btn").click(function () {
+                var con = $(".con");
+                // con.fadeIn(2000, ()=>{})
+                // con.fadeOut(2000, ()=>{})
+                // con.fadeToggle(2000, ()=>{})
+                con.fadeTo(3000, 0.5, () => {
+                    alert("fadding 50%")
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

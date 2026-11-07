@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Selectors Example</title>
+    <!-- Include jQuery from a CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+    <button>Click to Turn Everything Green</button>
+    
+    <p>This is a standard paragraph (Tag Selector)</p>
+    <p id="para">This paragraph has an ID (ID Selector)</p>
+    <p class="para">This paragraph has a class (Class Selector)</p>
+    <p class="para">Another paragraph with a class (Element.class Selector)</p>
+
+    <script>
+        $(document).ready(function(){            
+            $("p").click(function(){
+                alert("hi from <p>");
+            });
+
+            // 2. ID Selector: triggers when the element with id="para" is clicked
+            // $("#para").click(function(){
+            //     alert("hi from #para");
+            // });
+
+            // 3. Class Selector: triggers when any element with class="para" is clicked
+            // $(".para").click(function(){
+            //     alert("hi from .para");
+            // });
+
+            // 4. Element.class Selector: triggers when a <p> element with class="para" is clicked
+            // $("p.para").click(function(){
+            //     alert("hi from p.para");
+            // });
+
+            // 5. Universal Selector: changes the background color of every element (*) when the button is clicked
+            // $("button").click(function(){
+            //     $("*").css("background-color", "green");
+            // });
+
+        });
+    </script>
+
+</body>
+</html>
